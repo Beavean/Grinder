@@ -16,6 +16,9 @@
 		08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */; };
 		08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */; };
 		08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376B28DB257800D7A511 /* FirebaseUser.swift */; };
+		08F2376E28DB40C000D7A511 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376D28DB40C000D7A511 /* Constants.swift */; };
+		08F2377328DB48EF00D7A511 /* FirebaseCollectionReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2377228DB48EF00D7A511 /* FirebaseCollectionReference.swift */; };
+		08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2377428DB4A0000D7A511 /* FirebaseListener.swift */; };
 		EDCF7CF18EEDF64EB44EFDB6 /* Pods_Grinder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8120EB14C5E76E8E06104130 /* Pods_Grinder.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +34,9 @@
 		08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		08F2376B28DB257800D7A511 /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
+		08F2376D28DB40C000D7A511 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		08F2377228DB48EF00D7A511 /* FirebaseCollectionReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseCollectionReference.swift; sourceTree = "<group>"; };
+		08F2377428DB4A0000D7A511 /* FirebaseListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseListener.swift; sourceTree = "<group>"; };
 		8120EB14C5E76E8E06104130 /* Pods_Grinder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Grinder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55D16C9FFCEC406AD52C95C /* Pods-Grinder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grinder.release.xcconfig"; path = "Target Support Files/Pods-Grinder/Pods-Grinder.release.xcconfig"; sourceTree = "<group>"; };
 		BACB25E1D5B08FD9F15343F1 /* Pods-Grinder.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Grinder.debug.xcconfig"; path = "Target Support Files/Pods-Grinder/Pods-Grinder.debug.xcconfig"; sourceTree = "<group>"; };
@@ -71,9 +77,9 @@
 			children = (
 				088C90C928DA33EB0032650A /* AppDelegate.swift */,
 				088C90CB28DA33EB0032650A /* SceneDelegate.swift */,
-				08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */,
-				08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */,
-				08F2376B28DB257800D7A511 /* FirebaseUser.swift */,
+				08F2377128DB489D00D7A511 /* WelcomeScreen */,
+				08F2376F28DB488400D7A511 /* Model */,
+				08F2377028DB489300D7A511 /* Helpers */,
 				088C90CF28DA33EB0032650A /* Main.storyboard */,
 				088C90D228DA33EC0032650A /* Assets.xcassets */,
 				088C90D428DA33EC0032650A /* LaunchScreen.storyboard */,
@@ -81,6 +87,33 @@
 				088C90DD28DA38450032650A /* GoogleService-Info.plist */,
 			);
 			path = Grinder;
+			sourceTree = "<group>";
+		};
+		08F2376F28DB488400D7A511 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08F2376B28DB257800D7A511 /* FirebaseUser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		08F2377028DB489300D7A511 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				08F2376D28DB40C000D7A511 /* Constants.swift */,
+				08F2377228DB48EF00D7A511 /* FirebaseCollectionReference.swift */,
+				08F2377428DB4A0000D7A511 /* FirebaseListener.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		08F2377128DB489D00D7A511 /* WelcomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */,
+				08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */,
+			);
+			path = WelcomeScreen;
 			sourceTree = "<group>";
 		};
 		80BB888D7040AE057B635A2C /* Pods */ = {
@@ -216,11 +249,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */,
 				08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */,
+				08F2377328DB48EF00D7A511 /* FirebaseCollectionReference.swift in Sources */,
 				08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */,
 				08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */,
 				088C90CA28DA33EB0032650A /* AppDelegate.swift in Sources */,
 				088C90CC28DA33EB0032650A /* SceneDelegate.swift in Sources */,
+				08F2376E28DB40C000D7A511 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,8 +27,14 @@ class WelcomeViewController: UIViewController {
     //MARK: - IBActions
     
     @IBAction func forgotPasswordButtonPressed(_ sender: Any) {
-        if emailTextField.text != "" {
-            
+        if emailTextField.text != "", let email = emailTextField.text {
+            FirebaseUser.resetPasswordFor(email: email) { error in
+                if let error = error {
+                    ProgressHUD.showError(error.localizedDescription)
+                } else {
+                    ProgressHUD.showSucceed("Please check your email!")
+                }
+            }
         } else {
             ProgressHUD.showError("Please enter your email address")
         }
@@ -36,7 +42,16 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         if emailTextField.text != "" && passwordTextField.text != "" {
-            
+            guard let email = emailTextField.text, let password = passwordTextField.text else { return }
+            FirebaseUser.loginUserWith(email: email, password: password) { error, isEmailVerified in
+                if let error = error {
+                    ProgressHUD.showError(error.localizedDescription)
+                } else if isEmailVerified {
+                    
+                } else {
+                    ProgressHUD.showError("Please verify your email")
+                }
+            }
         } else {
             ProgressHUD.showError("All fields are required")
         }
