@@ -20,13 +20,13 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var backgroundImageView: UIImageView!
-
+    
     //MARK: - Variables
     
     var isMale = true
     
     //MARK: - Lifecycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
@@ -37,12 +37,16 @@ class RegisterViewController: UIViewController {
     
     @IBAction func backButtonPressed(_ sender: Any) {
         self.dismiss(animated: true)
-
+        
     }
     
     @IBAction func registerButtonPressed(_ sender: Any) {
         if isTextDataInputed() {
-            registerUser()
+            if passwordTextField.text! == confirmPasswordTextField.text! {
+                registerUser()
+            } else {
+                ProgressHUD.showError("Passwords do not match")
+            }
         } else {
             ProgressHUD.showError("All fields are required")
         }
@@ -86,6 +90,13 @@ class RegisterViewController: UIViewController {
     }
     
     private func registerUser() {
-        
+        ProgressHUD.show()
+        FirebaseUser.registerUserWith(email: emailTextField.text!, password: passwordTextField.text!, username: usernameTextField.text!, city: cityTextField.text!, isMale: isMale, dateOfBirth: Date()) { error in
+            if let error = error {
+                ProgressHUD.showError(error.localizedDescription)
+            } else {
+                ProgressHUD.showSuccess("Verification email sent")
+            }
+        }
     }
 }
