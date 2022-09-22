@@ -42,12 +42,14 @@ class WelcomeViewController: UIViewController {
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         if emailTextField.text != "" && passwordTextField.text != "" {
+            ProgressHUD.show()
             guard let email = emailTextField.text, let password = passwordTextField.text else { return }
             FirebaseUser.loginUserWith(email: email, password: password) { error, isEmailVerified in
                 if let error = error {
                     ProgressHUD.showError(error.localizedDescription)
                 } else if isEmailVerified {
-                    
+                    ProgressHUD.dismiss()
+                    self.enterApplication()
                 } else {
                     ProgressHUD.showError("Please verify your email")
                 }
@@ -75,6 +77,14 @@ class WelcomeViewController: UIViewController {
     
     private func dismissKeyboard() {
         self.view.endEditing(false)
+    }
+    
+    //MARK: - Navigation
+    
+    private func enterApplication() {
+        guard let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.mainViewIdentifier) as? UITabBarController else { return }
+        mainView.modalPresentationStyle = .fullScreen
+        self.present(mainView, animated: true)
     }
 }
 

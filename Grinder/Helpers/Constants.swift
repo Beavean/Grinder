@@ -31,6 +31,10 @@ struct K {
     static let registeredDate = "registeredDate"
     static let pushID = "pushID"
     static let currentUser = "currentUser"
+    
+    //MARK: - Storyboard Identifiers
+    
+    static let mainViewIdentifier = "MainView"
 
 }
 

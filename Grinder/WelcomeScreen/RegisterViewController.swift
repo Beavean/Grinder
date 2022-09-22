@@ -15,15 +15,16 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var cityTextField: UITextField!
-    @IBOutlet weak var dateOfBirthTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var genderSegmentedControl: UISegmentedControl!
     @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     //MARK: - Variables
     
     var isMale = true
+    var birthDate: String?
     
     //MARK: - Lifecycle
     
@@ -70,28 +71,31 @@ class RegisterViewController: UIViewController {
     
     //MARK: - Selectors
     
+    @objc func handleDatePicker() {
+        birthDate = datePicker.date.getStringFromDate()
+    }
+    
     @objc func backgroundTap() {
         dismissKeyboard()
     }
     
-    //MARK: - Helpers
-    
-    private func dismissKeyboard() {
+    @objc func dismissKeyboard() {
         self.view.endEditing(false)
     }
+    
+    //MARK: - Helpers
     
     private func isTextDataInputed() -> Bool {
         return usernameTextField.text != ""
         && emailTextField.text != ""
         && cityTextField.text != ""
-        && dateOfBirthTextField.text != ""
         && passwordTextField.text != ""
         && confirmPasswordTextField.text != ""
     }
     
     private func registerUser() {
         ProgressHUD.show()
-        FirebaseUser.registerUserWith(email: emailTextField.text!, password: passwordTextField.text!, username: usernameTextField.text!, city: cityTextField.text!, isMale: isMale, dateOfBirth: Date()) { error in
+        FirebaseUser.registerUserWith(email: emailTextField.text!, password: passwordTextField.text!, username: usernameTextField.text!, city: cityTextField.text!, isMale: isMale, dateOfBirth: datePicker.date) { error in
             if let error = error {
                 ProgressHUD.showError(error.localizedDescription)
             } else {
