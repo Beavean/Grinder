@@ -500,7 +500,7 @@
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstItem="eNX-WY-E3J" firstAttribute="top" secondItem="V1f-IX-Ovt" secondAttribute="top" constant="8" id="5ik-Gw-Rfv"/>
                                                         <constraint firstItem="eNX-WY-E3J" firstAttribute="leading" secondItem="V1f-IX-Ovt" secondAttribute="leading" constant="8" id="AXx-Is-jUW"/>
@@ -745,12 +745,12 @@
                         <outlet property="cityCountryLabel" destination="UFz-zz-iKE" id="kxb-80-7sn"/>
                         <outlet property="cityTextField" destination="xdA-6h-o41" id="TfK-WT-f0J"/>
                         <outlet property="countryTextField" destination="xO7-dS-dlG" id="KqN-dl-F6s"/>
-                        <outlet property="educationTextField" destination="c88-o7-rQo" id="tBb-cx-rar"/>
                         <outlet property="genderTextField" destination="pyk-JV-EEw" id="l4g-kJ-wpd"/>
                         <outlet property="heightTextField" destination="sdr-E7-2lw" id="mrl-ez-680"/>
                         <outlet property="jobTextField" destination="TQF-Ym-tOi" id="Iaf-E4-R5v"/>
                         <outlet property="lookingForTextField" destination="BeR-vO-0gT" id="lko-QO-sRd"/>
                         <outlet property="nameAgeLabel" destination="N5z-4D-eAS" id="aiW-L4-LCC"/>
+                        <outlet property="professionTextField" destination="c88-o7-rQo" id="tBb-cx-rar"/>
                         <outlet property="profileCellBackgroundView" destination="RYW-Wb-mp9" id="zJt-k4-QHY"/>
                     </connections>
                 </tableViewController>

@@ -116,6 +116,20 @@ class FirebaseUser: Equatable {
             dateOfBirth = dictionary[K.dateOfBirth] as? Date ?? Date()
         }
     }
+    
+    //MARK: - Returning current user
+    
+    class func currentID() -> String? {
+        guard let currentUser = Auth.auth().currentUser?.uid else { return nil }
+        return currentUser
+    }
+    
+    class func currentUser() -> FirebaseUser? {
+        guard Auth.auth().currentUser?.uid != nil,
+              let userDictionary = K.userDefaults.object(forKey: K.currentUser) as? NSDictionary
+        else { return nil }
+        return FirebaseUser(dictionary: userDictionary)
+    }
 
     //MARK: - Login
     
