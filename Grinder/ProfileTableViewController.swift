@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Gallery
+import ProgressHUD
 
 class ProfileTableViewController: UITableViewController {
     
@@ -27,16 +29,17 @@ class ProfileTableViewController: UITableViewController {
     
     //MARK: - Variables
     
+    var uploadingAvatar = true
+    var avatarImage: UIImage?
+    var gallery: GalleryController!
+    
     var editingMode = false {
         didSet {
             updateEditingMode()
-            editingMode ? showKeyboard() : hideKeyboard()
             showSaveButton()
             loadUserData()
         }
     }
-    
-    var avatarImage: UIImage?
     
     //MARK: - Lifecycle
     
@@ -66,6 +69,7 @@ class ProfileTableViewController: UITableViewController {
     
     @IBAction func editButtonPressed(_ sender: UIButton) {
         editingMode.toggle()
+        editingMode ? showKeyboard() : hideKeyboard()
     }
     
     //MARK: - Selectors
@@ -81,10 +85,15 @@ class ProfileTableViewController: UITableViewController {
         user.lookingFor = lookingForTextField.text ?? ""
         user.height = Double(heightTextField.text ?? "0") ?? 0.0
         if let avatarImage = avatarImage {
-            
-            saveUserData(user: user)
+            uploadAvatar(avatarImage) { avatarLink in
+                user.avatarLink = avatarLink ?? ""
+                user.avatar = self.avatarImage
+                self.saveUserData(user: user)
+                self.loadUserData()
+            }
         } else {
             saveUserData(user: user)
+            loadUserData()
         }
         editingMode = false
         showSaveButton()
@@ -119,6 +128,7 @@ class ProfileTableViewController: UITableViewController {
         heightTextField.text = "\(currentUser.height)"
         lookingForTextField.text = currentUser.lookingFor
         avatarImageView.image = UIImage(named: "avatar")
+        avatarImageView.image = currentUser.avatar
     }
     
     private func updateEditingMode() {
@@ -145,15 +155,44 @@ class ProfileTableViewController: UITableViewController {
         user.saveUserToFireStore()
     }
     
+    //MARK: - File Storage
+    
+    private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
+        ProgressHUD.show()
+        guard let currentID = FirebaseUser.currentID() else { return }
+        let fileDirectory = "Avatars/_" + currentID + ".jpg"
+        FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
+            ProgressHUD.dismiss()
+            completion(avatarLink)
+        }
+    }
+    
+    private func uploadImages(images: [UIImage?]) {
+        ProgressHUD.show()
+        
+    }
+    
+    //MARK: - Gallery
+    
+    private func showGallery(forAvatar: Bool) {
+        uploadingAvatar = forAvatar
+        self.gallery = GalleryController()
+        self.gallery.delegate = self
+        Config.tabsToShow = [.imageTab, .cameraTab]
+        Config.Camera.imageLimit = forAvatar ? 1 : 10
+        Config.initialTab = .imageTab
+        self.present(gallery, animated: true)
+    }
+    
     //MARK: - Alert controller
     
     private func showPictureOptions() {
         let alertController = UIAlertController(title: "Upload picture", message: "Change avatar or upload more pictures", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Change Avatar", style: .default, handler: { alert in
-            
+            self.showGallery(forAvatar: true)
         }))
         alertController.addAction(UIAlertAction(title: "Upload pictures", style: .default, handler: { alert in
-            
+            self.showGallery(forAvatar: false)
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(alertController, animated: true)
@@ -172,5 +211,42 @@ class ProfileTableViewController: UITableViewController {
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(alertController, animated: true)
+    }
+}
+
+extension ProfileTableViewController: GalleryControllerDelegate {
+    
+    func galleryController(_ controller: Gallery.GalleryController, didSelectImages images: [Gallery.Image]) {
+        if !images.isEmpty {
+            if uploadingAvatar {
+                images.first!.resolve { icon in
+                    if let icon = icon {
+                        self.editingMode = true
+                        self.showSaveButton()
+                        self.avatarImageView.image = icon
+                        self.avatarImage = icon
+                    } else {
+                        ProgressHUD.showError("Could not select image")
+                    }
+                }
+            } else {
+                Image.resolve(images: images) { resolvedImages in
+                    self.uploadImages(images: resolvedImages)
+                }
+            }
+        }
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryController(_ controller: Gallery.GalleryController, didSelectVideo video: Gallery.Video) {
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryController(_ controller: Gallery.GalleryController, requestLightbox images: [Gallery.Image]) {
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryControllerDidCancel(_ controller: Gallery.GalleryController) {
+        controller.dismiss(animated: true)
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 struct K {
     
     static let userDefaults = UserDefaults.standard
+    static let fileReference = "gs://grinder-e5ee5.appspot.com"
     
     //MARK: - FirebaseUser
     

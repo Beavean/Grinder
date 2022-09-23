@@ -109,12 +109,13 @@ class FirebaseUser: Equatable {
         self.avatarLink = dictionary[K.avatarLink] as? String ?? ""
         self.likedUsersArray = dictionary[K.likedUsersArray] as? [String]
         self.imageLinks = dictionary[K.imageLinks] as? [String]
-        
         if let date = dictionary[K.dateOfBirth] as? Timestamp {
             dateOfBirth = date.dateValue()
         } else {
             dateOfBirth = dictionary[K.dateOfBirth] as? Date ?? Date()
         }
+        let placeHolder = isMale ? "mPlaceholder" : "fPlaceholder"
+        avatar = UIImage(named: placeHolder)
     }
     
     //MARK: - Returning current user
