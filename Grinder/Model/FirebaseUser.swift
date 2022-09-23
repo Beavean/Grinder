@@ -115,7 +115,7 @@ class FirebaseUser: Equatable {
             dateOfBirth = dictionary[K.dateOfBirth] as? Date ?? Date()
         }
         let placeHolder = isMale ? "mPlaceholder" : "fPlaceholder"
-        avatar = UIImage(named: placeHolder)
+        avatar = UIImage(contentsOfFile: fileInDocumentsDirectory(filename: self.objectID)) ?? UIImage(named: placeHolder)
     }
     
     //MARK: - Returning current user
@@ -130,6 +130,14 @@ class FirebaseUser: Equatable {
               let userDictionary = K.userDefaults.object(forKey: K.currentUser) as? NSDictionary
         else { return nil }
         return FirebaseUser(dictionary: userDictionary)
+    }
+    
+    func getUserAvatarFromFirestore(completion: @escaping (_ didSet: Bool) -> Void) {
+        FileStorage.downloadImage(imageURL: self.avatarLink) { image in
+            let placeholder = self.isMale ? "mPlaceholder" : "fPlaceholder"
+            self.avatar = image ?? UIImage(named: placeholder)
+            completion(true)
+        }
     }
 
     //MARK: - Login

@@ -117,6 +117,9 @@ class ProfileTableViewController: UITableViewController {
     
     private func loadUserData() {
         guard let currentUser = FirebaseUser.currentUser() else { return }
+        FileStorage.downloadImage(imageURL: currentUser.avatarLink) { image in
+            
+        }
         nameAgeLabel.text = currentUser.username + ", " + "\(abs(currentUser.dateOfBirth.interval(ofComponent: .year, fromDate: Date())))"
         cityCountryLabel.text = currentUser.country + ", " + currentUser.city
         aboutMeTextView.text = currentUser.about.isEmpty ? "Some information about me..." : currentUser.about
@@ -163,6 +166,8 @@ class ProfileTableViewController: UITableViewController {
         let fileDirectory = "Avatars/_" + currentID + ".jpg"
         FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
             ProgressHUD.dismiss()
+            guard let currentUserID = FirebaseUser.currentID(), let image = image.jpegData(compressionQuality: 0.8) as? NSData else { return }
+            FileStorage.saveImageLocally(imageData: image, fileName: currentUserID)
             completion(avatarLink)
         }
     }
