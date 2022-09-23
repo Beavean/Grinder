@@ -139,7 +139,7 @@ class FirebaseUser: Equatable {
             completion(true)
         }
     }
-
+    
     //MARK: - Login
     
     class func loginUserWith(email: String, password: String, completion: @escaping(_ error: Error?, _ isEmailVerified: Bool) -> Void) {
@@ -175,14 +175,44 @@ class FirebaseUser: Equatable {
         }
     }
     
+    //MARK: - Edit user profile
+    
+    func updateUserEmail(newEmail: String, completion: @escaping (_ error: Error?) -> Void) {
+        Auth.auth().currentUser?.updateEmail(to: newEmail, completion: { error in
+            FirebaseUser.resendVerification(email: newEmail) { error in
+                
+            }
+            completion(error)
+        })
+    }
+    
     //MARK: - Resend links
     
-    class func resetPasswordFor(email: String, completion: @escaping (_ error: Error?) -> Void) {
+    class func resendVerification(email: String, completion: @escaping (_ error: Error?) -> Void) {
         Auth.auth().currentUser?.reload(completion: { error in
             Auth.auth().currentUser?.sendEmailVerification(completion: { error in
                 completion(error)
             })
         })
+    }
+    
+    class func resetPasswordFor(email: String, completion: @escaping (_ error: Error?) -> Void) {
+        Auth.auth().sendPasswordReset(withEmail: email) { error in
+            completion(error)
+        }
+    }
+    
+    //MARK: - LogOut user
+    
+    class func logOutCurrentUser(completion: @escaping(_ error: Error?) -> Void) {
+        do {
+            try Auth.auth().signOut()
+            K.userDefaults.removeObject(forKey: K.currentUser)
+            K.userDefaults.synchronize()
+            completion(nil)
+        } catch let error {
+            completion(error)
+        }
     }
     
     //MARK: - Save user methods

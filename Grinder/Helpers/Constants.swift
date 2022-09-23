@@ -36,6 +36,7 @@ struct K {
     //MARK: - Storyboard Identifiers
     
     static let mainViewIdentifier = "MainView"
+    static let loginViewIdentifier = "LoginView"
 
 }
 

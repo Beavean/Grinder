@@ -32,6 +32,25 @@ class FileStorage {
         })
     }
     
+    class func uploadImages(_ images: [UIImage?], completion: @escaping (_ imageLinks: [String]) -> Void) {
+        var uploadImagesCount = 0
+        var imageLinkArray = [String]()
+        var nameSuffix = 0
+        for image in images {
+            guard let currentID = FirebaseUser.currentID(), let image = image else { return }
+            let fileDirectory = "UserImages/" + currentID + "/" + "\(nameSuffix)" + ".jpg"
+            uploadImage(image, directory: fileDirectory) { imageLink in
+                guard let imageLink = imageLink else { return }
+                imageLinkArray.append(imageLink)
+                uploadImagesCount += 1
+                if uploadImagesCount == images.count {
+                    completion(imageLinkArray)
+                }
+            }
+            nameSuffix += 1
+        }
+    }
+    
     class func downloadImage(imageURL: String, completion: @escaping (_ image: UIImage?) -> Void) {
         guard let imageFileName = imageURL.components(separatedBy: "_").last?.components(separatedBy: ".").first else { return }
         if fileExistsAt(path: imageFileName) {
@@ -58,6 +77,26 @@ class FileStorage {
                 }
             } else {
                 completion(nil)
+            }
+        }
+    }
+    
+    class func downloadImages(imageURLs: [String], completion: @escaping (_ image: [UIImage?]) -> Void) {
+        var imageArray = [UIImage]()
+        var downloadCounter = 0
+        for link in imageURLs {
+            guard let url = NSURL(string: link) as? URL else { return }
+            let downloadQueue = DispatchQueue(label: "downloadQueue")
+            downloadQueue.async {
+                downloadCounter += 1
+                if let data = NSData(contentsOf: url) as? Data, let image = UIImage(data: data) {
+                    imageArray.append(image)
+                    if downloadCounter == imageArray.count {
+                        completion(imageArray)
+                    }
+                } else {
+                    completion(imageArray)
+                }
             }
         }
     }

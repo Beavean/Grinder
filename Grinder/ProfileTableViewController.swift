@@ -33,6 +33,8 @@ class ProfileTableViewController: UITableViewController {
     var avatarImage: UIImage?
     var gallery: GalleryController!
     
+    var alertTextField: UITextField!
+    
     var editingMode = false {
         didSet {
             updateEditingMode()
@@ -130,8 +132,8 @@ class ProfileTableViewController: UITableViewController {
         countryTextField.text = currentUser.country
         heightTextField.text = "\(currentUser.height)"
         lookingForTextField.text = currentUser.lookingFor
-        avatarImageView.image = UIImage(named: "avatar")
-        avatarImageView.image = currentUser.avatar
+        avatarImageView.image = UIImage(named: "avatar")?.circleMasked
+        avatarImageView.image = currentUser.avatar?.circleMasked
     }
     
     private func updateEditingMode() {
@@ -174,7 +176,12 @@ class ProfileTableViewController: UITableViewController {
     
     private func uploadImages(images: [UIImage?]) {
         ProgressHUD.show()
-        
+        FileStorage.uploadImages(images) { imageLinks in
+            ProgressHUD.dismiss()
+            guard let currentUser = FirebaseUser.currentUser() else { return }
+            currentUser.imageLinks = imageLinks
+            self.saveUserData(user: currentUser)
+        }
     }
     
     //MARK: - Gallery
@@ -206,16 +213,77 @@ class ProfileTableViewController: UITableViewController {
     private func showEditOptions() {
         let alertController = UIAlertController(title: "Edit Account", message: "Edit information about you", preferredStyle: .actionSheet)
         alertController.addAction(UIAlertAction(title: "Change Email", style: .default, handler: { alert in
-            
+            self.showChangesField(value: "Email")
         }))
         alertController.addAction(UIAlertAction(title: "Change Name", style: .default, handler: { alert in
-            
+            self.showChangesField(value: "Name")
         }))
         alertController.addAction(UIAlertAction(title: "Log Out", style: .destructive, handler: { alert in
-            
+            self.logOutUser()
         }))
         alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         self.present(alertController, animated: true)
+    }
+    
+    private func showChangesField(value: String) {
+        let alertController = UIAlertController(title: "Updating \(value)", message: "Please enter your \(value)", preferredStyle: .alert)
+        alertController.addTextField { textField in
+            self.alertTextField = textField
+            self.alertTextField.placeholder = "New \(value)"
+        }
+        alertController.addAction(UIAlertAction(title: "Update", style: .destructive, handler: { action in
+            self.updateUserWith(value: value)
+        }))
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        self.present(alertController, animated: true)
+    }
+    
+    //MARK: - Change User info
+    
+    private func updateUserWith(value: String) {
+        if alertTextField.text != "" {
+            value == "Email" ? changeEmail() : changeUserName()
+        } else {
+            ProgressHUD.showError("\(value) is empty")
+        }
+    }
+    
+    private func changeEmail() {
+        guard let newEmail = alertTextField.text else { return }
+        FirebaseUser.currentUser()?.updateUserEmail(newEmail: newEmail, completion: { error in
+            if let error = error {
+                ProgressHUD.showError(error.localizedDescription)
+            } else {
+                guard let currentUser = FirebaseUser.currentUser() else { return }
+                currentUser.email = newEmail
+                self.saveUserData(user: currentUser)
+                self.loadUserData()
+                ProgressHUD.showSuccess("Success!")
+            }
+        })
+    }
+    
+    private func changeUserName() {
+        guard let currentUser = FirebaseUser.currentUser(), let newUsername = alertTextField.text else { return }
+        currentUser.username = newUsername
+        saveUserData(user: currentUser)
+        loadUserData()
+    }
+    
+    //MARK: - Logout
+    
+    private func logOutUser() {
+        FirebaseUser.logOutCurrentUser { error in
+            if let error = error {
+                ProgressHUD.showError(error.localizedDescription)
+            } else {
+                let loginView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.loginViewIdentifier)
+                DispatchQueue.main.async {
+                    loginView.modalPresentationStyle = .fullScreen
+                    self.present(loginView, animated: true, completion: nil)
+                }
+            }
+        }
     }
 }
 
@@ -228,7 +296,7 @@ extension ProfileTableViewController: GalleryControllerDelegate {
                     if let icon = icon {
                         self.editingMode = true
                         self.showSaveButton()
-                        self.avatarImageView.image = icon
+                        self.avatarImageView.image = icon.circleMasked
                         self.avatarImage = icon
                     } else {
                         ProgressHUD.showError("Could not select image")
