@@ -27,7 +27,7 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var lookingForTextField: UITextField!
     
-    //MARK: - Variables
+    //MARK: - Properties
     
     var uploadingAvatar = true
     var avatarImage: UIImage?

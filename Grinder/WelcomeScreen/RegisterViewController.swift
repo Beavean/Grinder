@@ -21,7 +21,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
-    //MARK: - Variables
+    //MARK: - Properties
     
     var isMale = true
     var birthDate: String?
