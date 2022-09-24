@@ -16,6 +16,11 @@
 		08B3FEED28DC78D80008E317 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3FEEC28DC78D80008E317 /* Extensions.swift */; };
 		08B3FEEF28DC8F910008E317 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */; };
 		08F04E3628DDC916002D2A16 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3528DDC916002D2A16 /* FileStorage.swift */; };
+		08F04E3928DEF74F002D2A16 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3828DEF74F002D2A16 /* CardViewController.swift */; };
+		08F04E3C28DF0EEB002D2A16 /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3B28DF0EEB002D2A16 /* UserCard.swift */; };
+		08F04E3F28DF1115002D2A16 /* UserCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3E28DF1115002D2A16 /* UserCardModel.swift */; };
+		08F04E4128DF1171002D2A16 /* UserCardOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E4028DF1171002D2A16 /* UserCardOverlay.swift */; };
+		08F04E4328DF1603002D2A16 /* UserCardContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E4228DF1603002D2A16 /* UserCardContentView.swift */; };
 		08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */; };
 		08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */; };
 		08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F2376B28DB257800D7A511 /* FirebaseUser.swift */; };
@@ -37,6 +42,11 @@
 		08B3FEEC28DC78D80008E317 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		08F04E3528DDC916002D2A16 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
+		08F04E3828DEF74F002D2A16 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		08F04E3B28DF0EEB002D2A16 /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
+		08F04E3E28DF1115002D2A16 /* UserCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardModel.swift; sourceTree = "<group>"; };
+		08F04E4028DF1171002D2A16 /* UserCardOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardOverlay.swift; sourceTree = "<group>"; };
+		08F04E4228DF1603002D2A16 /* UserCardContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardContentView.swift; sourceTree = "<group>"; };
 		08F2376728DB1B8E00D7A511 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		08F2376928DB1BAC00D7A511 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		08F2376B28DB257800D7A511 /* FirebaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUser.swift; sourceTree = "<group>"; };
@@ -83,10 +93,10 @@
 			children = (
 				088C90C928DA33EB0032650A /* AppDelegate.swift */,
 				088C90CB28DA33EB0032650A /* SceneDelegate.swift */,
-				08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */,
-				08F04E3728DE0B68002D2A16 /* FirebaseHelpers */,
 				08F2377128DB489D00D7A511 /* WelcomeScreen */,
+				08F04E3A28DF0EB6002D2A16 /* MainViews */,
 				08F2376F28DB488400D7A511 /* Model */,
+				08F04E3728DE0B68002D2A16 /* FirebaseHelpers */,
 				08F2377028DB489300D7A511 /* Helpers */,
 				088C90CF28DA33EB0032650A /* Main.storyboard */,
 				088C90D228DA33EC0032650A /* Assets.xcassets */,
@@ -105,10 +115,31 @@
 			path = FirebaseHelpers;
 			sourceTree = "<group>";
 		};
+		08F04E3A28DF0EB6002D2A16 /* MainViews */ = {
+			isa = PBXGroup;
+			children = (
+				08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */,
+				08F04E3828DEF74F002D2A16 /* CardViewController.swift */,
+			);
+			path = MainViews;
+			sourceTree = "<group>";
+		};
+		08F04E3D28DF10F5002D2A16 /* CardViews */ = {
+			isa = PBXGroup;
+			children = (
+				08F04E3B28DF0EEB002D2A16 /* UserCard.swift */,
+				08F04E3E28DF1115002D2A16 /* UserCardModel.swift */,
+				08F04E4028DF1171002D2A16 /* UserCardOverlay.swift */,
+				08F04E4228DF1603002D2A16 /* UserCardContentView.swift */,
+			);
+			path = CardViews;
+			sourceTree = "<group>";
+		};
 		08F2376F28DB488400D7A511 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				08F2376B28DB257800D7A511 /* FirebaseUser.swift */,
+				08F04E3D28DF10F5002D2A16 /* CardViews */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -269,12 +300,17 @@
 				08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */,
 				08F04E3628DDC916002D2A16 /* FileStorage.swift in Sources */,
 				08B3FEED28DC78D80008E317 /* Extensions.swift in Sources */,
+				08F04E4328DF1603002D2A16 /* UserCardContentView.swift in Sources */,
 				08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */,
+				08F04E3F28DF1115002D2A16 /* UserCardModel.swift in Sources */,
 				08F2377328DB48EF00D7A511 /* FirebaseCollectionReference.swift in Sources */,
 				08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */,
 				08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */,
 				08B3FEEF28DC8F910008E317 /* ProfileTableViewController.swift in Sources */,
+				08F04E3928DEF74F002D2A16 /* CardViewController.swift in Sources */,
 				088C90CA28DA33EB0032650A /* AppDelegate.swift in Sources */,
+				08F04E4128DF1171002D2A16 /* UserCardOverlay.swift in Sources */,
+				08F04E3C28DF0EEB002D2A16 /* UserCard.swift in Sources */,
 				088C90CC28DA33EB0032650A /* SceneDelegate.swift in Sources */,
 				08F2376E28DB40C000D7A511 /* Constants.swift in Sources */,
 			);

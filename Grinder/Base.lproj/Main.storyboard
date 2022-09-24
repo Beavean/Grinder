@@ -306,17 +306,17 @@
             </objects>
             <point key="canvasLocation" x="807.69230769230762" y="3.5545023696682461"/>
         </scene>
-        <!--View Controller-->
+        <!--Grinder-->
         <scene sceneID="OCd-ZY-OC6">
             <objects>
-                <viewController id="97Y-VJ-EPS" sceneMemberID="viewController">
+                <viewController id="97Y-VJ-EPS" customClass="CardViewController" customModule="Grinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bI1-H8-EUp">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="2sB-o0-nCs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="5NZ-MV-xzr"/>
+                    <navigationItem key="navigationItem" title="Grinder" id="5NZ-MV-xzr"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMp-L7-d3S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -340,11 +340,11 @@
             </objects>
             <point key="canvasLocation" x="1686" y="3"/>
         </scene>
-        <!--Item 1-->
+        <!--Navigation Controller-->
         <scene sceneID="akH-80-IfD">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wzX-wM-WfK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="GhS-6N-b77"/>
+                    <tabBarItem key="tabBarItem" title="" image="face.smiling.fill" catalog="system" id="GhS-6N-b77"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="g81-vh-Hct">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
@@ -765,6 +765,7 @@
         <image name="back" width="11" height="19"/>
         <image name="camera" width="60" height="60"/>
         <image name="edit" width="80" height="80"/>
+        <image name="face.smiling.fill" catalog="system" width="128" height="123"/>
         <image name="gear" catalog="system" width="128" height="122"/>
         <image name="loginBackground" width="375" height="812"/>
         <image name="settings" width="80" height="80"/>
