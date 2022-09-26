@@ -18,7 +18,38 @@ class FirebaseListener {
     //MARK: - Download users
     
     func downloadUsersFromFirebase(isInitialLoad: Bool, limit: Int, lastDocumentSnapshot: DocumentSnapshot?, completion: @escaping (_ users: [FirebaseUser], _ snapshot: DocumentSnapshot?) -> Void) {
-        
+        var query: Query!
+        var users = [FirebaseUser]()
+        if isInitialLoad {
+            query = FirebaseReference(.User).order(by: K.registeredDate, descending: false).limit(to: limit)
+            print("DEBUG: Downloading user from first \(limit)")
+        } else {
+            if let lastDocumentSnapshot = lastDocumentSnapshot {
+                query = FirebaseReference(.User).order(by: K.registeredDate, descending: false).limit(to: limit).start(afterDocument: lastDocumentSnapshot)
+                print("DEBUG: Next user loading from limi \(limit)")
+            } else {
+                print("DEBUG: last snapshot is nil")
+            }
+        }
+        if let query = query {
+            query.getDocuments { snapShot, error in
+                guard let snapShot = snapShot else { return }
+                if !snapShot.isEmpty {
+                    for userData in snapShot.documents {
+                        let userObject = userData.data() as NSDictionary
+                        if !(FirebaseUser.currentUser()?.likedUsersArray?.contains(userObject[K.objectID] as! String) ?? false) && FirebaseUser.currentID() != userObject[K.objectID] as? String {
+                            users.append(FirebaseUser(dictionary: userObject))
+                        }
+                    }
+                    completion(users, snapShot.documents.last)
+                } else {
+                    print("DEBUG: No more users to fetch")
+                    completion(users, nil)
+                }
+            }
+        } else {
+            completion(users, nil)
+        }
     }
     
     //MARK: - Current user

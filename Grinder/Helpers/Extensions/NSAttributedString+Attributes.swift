@@ -9,7 +9,7 @@ import UIKit
 
 extension NSAttributedString.Key {
     static var overlayAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 42)!,
+        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-Bold", size: 24)!,
         NSAttributedString.Key.kern: 5.0
     ]
     
