@@ -230,3 +230,25 @@ class FirebaseUser: Equatable {
         }
     }
 }
+
+func createUsers() {
+    
+    let names = ["Jordan", "Roman", "Benji", "Corey", "Chester", "Tom"]
+    var imageIndex = 1
+    var userIndex = 1
+    var isMale = true
+    for i in 0...(names.count - 1) {
+        let id = UUID().uuidString
+        let fileDirectory = "Avatars/_" + "\(id)" + ".jpg"
+        FileStorage.uploadImage(UIImage(named: "user\(imageIndex)")!, directory: fileDirectory) { avatarLink in
+            let user = FirebaseUser(objectID: id, email: "user\(userIndex)@mail.com", username: names[i], city: "No city", dateOfBirth: Date(), isMale: isMale, avatarLink: avatarLink ?? "")
+            isMale.toggle()
+            userIndex += 1
+            user.saveUserToFireStore()
+        }
+        imageIndex += 1
+        if imageIndex == 16 {
+            imageIndex = 1
+        }
+    }
+}

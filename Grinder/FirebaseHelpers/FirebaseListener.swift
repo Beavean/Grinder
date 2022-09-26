@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseCore
+import FirebaseFirestore
 
 class FirebaseListener {
     
@@ -14,7 +15,13 @@ class FirebaseListener {
     
     private init() {}
     
-    //MARK: - FirebaseUser
+    //MARK: - Download users
+    
+    func downloadUsersFromFirebase(isInitialLoad: Bool, limit: Int, lastDocumentSnapshot: DocumentSnapshot?, completion: @escaping (_ users: [FirebaseUser], _ snapshot: DocumentSnapshot?) -> Void) {
+        
+    }
+    
+    //MARK: - Current user
     
     func downloadCurrentUserFromFirebase(userID: String, email: String) {
         FirebaseReference(.User).document(userID).getDocument { snapshot, error in
