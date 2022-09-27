@@ -29,17 +29,7 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        createUsers()
         downloadInitialUsers()
-        
-        //        let user = FirebaseUser.currentUser()!
-        //        let cardModel = UserCardModel(id: user.objectID,
-        //                                      name: user.username,
-        //                                      age: user.dateOfBirth.interval(ofComponent: .year, fromDate: Date()),
-        //                                      occupation: user.profession,
-        //                                      image: user.avatar)
-        //        initialCardModels.append(cardModel)
-        //        layoutCardStackView()
     }
     
     //MARK: - Layout cards
@@ -108,7 +98,19 @@ class CardViewController: UIViewController {
     
     private func showUserProfileFor(userID: String) {
         let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.userProfileControllerIdentifier) as! UserProfileTableViewController
+        profileView.userObject = getUserWithId(userID: userID)
         self.present(profileView, animated: true)
+    }
+    
+    //MARK: - Helpers
+    
+    private func getUserWithId(userID: String) -> FirebaseUser? {
+        for user in userObject {
+            if user.objectID == userID {
+                return user
+            }
+        }
+        return nil
     }
 }
 
