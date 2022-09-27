@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SKPhotoBrowser
 
 class UserProfileTableViewController: UITableViewController {
     
@@ -31,6 +32,7 @@ class UserProfileTableViewController: UITableViewController {
     
     var userObject: FirebaseUser?
     var allImages = [UIImage]()
+    private let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
     
     //MARK: - Lifecycle
     
@@ -38,6 +40,7 @@ class UserProfileTableViewController: UITableViewController {
         super.viewDidAppear(animated)
         pageControl.hidesForSinglePage = true
         if let user = userObject {
+            updateLikeButtonStatus()
             showUserDetails(user: user)
             loadImages()
         }
@@ -53,11 +56,11 @@ class UserProfileTableViewController: UITableViewController {
     
     
     @IBAction func dislikeButtonPressed(_ sender: UIButton) {
-        
+        dismissView()
     }
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        
+        dismissView()
     }
     
     //MARK: -  TableViewDelegate
@@ -86,6 +89,7 @@ class UserProfileTableViewController: UITableViewController {
         sectionTwoView.layer.cornerRadius = 10
         sectionThreeView.layer.cornerRadius = 10
         sectionFourView.layer.cornerRadius = 10
+        pageControl.isHidden = true
     }
     
     //MARK: - Show user profile
@@ -129,8 +133,8 @@ class UserProfileTableViewController: UITableViewController {
             FileStorage.downloadImages(imageURLs: imageLinks) { image in
                 guard let image = image as? [UIImage] else { return }
                 self.allImages += image
-                self.setPageControlPages()
                 DispatchQueue.main.async {
+                    self.setPageControlPages()
                     self.hideActivityIndicator()
                     self.collectionView.reloadData()
                 }
@@ -144,10 +148,38 @@ class UserProfileTableViewController: UITableViewController {
     
     private func setPageControlPages() {
         self.pageControl.numberOfPages = self.allImages.count
+        pageControl.isHidden = false
     }
     
     private func setSelectedPageTo(page: Int) {
         self.pageControl.currentPage = page
+    }
+    
+    //MARK: - SKPhotoBrowser
+    
+    private func showImages(_ images: [UIImage], startIndex: Int) {
+        var SKImages = [SKPhoto]()
+        for image in images {
+            SKImages.append(SKPhoto.photoWithImage(image))
+        }
+        let browser = SKPhotoBrowser(photos: SKImages)
+        browser.initializePageIndex(startIndex)
+        self.present(browser, animated: true)
+    }
+    
+    //MARK: - Update UI
+    
+    private func updateLikeButtonStatus() {
+        guard let currentUser = FirebaseUser.currentUser(),
+              let likedUserArray = currentUser.likedUsersArray,
+              let objectID = userObject?.objectID else { return }
+        likeButton.isEnabled = likedUserArray.contains(objectID)
+    }
+    
+    //MARK: - Helpers
+    
+    private func dismissView() {
+        self.dismiss(animated: true)
     }
 }
 
@@ -169,5 +201,27 @@ extension UserProfileTableViewController: UICollectionViewDataSource {
 
 
 extension UserProfileTableViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        showImages(allImages, startIndex: indexPath.row)
+    }
+}
+
+extension UserProfileTableViewController: UICollectionViewDelegateFlowLayout {
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 473)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        setSelectedPageTo(page: indexPath.row)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return sectionInsets.left
+    }
 }

@@ -344,10 +344,10 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sYx-3j-hnm">
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="602"/>
                                                     <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H6q-6V-Wkg">
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H6q-6V-Wkg">
                                                             <rect key="frame" x="8" y="8" width="374" height="472"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QeX-x0-xR4">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QeX-x0-xR4">
                                                                 <size key="itemSize" width="373" height="473"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -355,13 +355,13 @@
                                                             </collectionViewFlowLayout>
                                                             <cells>
                                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="Dsc-1E-U44" customClass="ImageCollectionViewCell" customModule="Grinder" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.66666666666666663" y="0.0" width="373" height="473"/>
+                                                                    <rect key="frame" x="0.0" y="-0.66666666666666663" width="373" height="473"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7gU-TZ-lmi">
                                                                         <rect key="frame" x="0.0" y="0.0" width="373" height="473"/>
                                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fhx-72-yQ8">
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fhx-72-yQ8">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="373" height="473"/>
                                                                             </imageView>
                                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="deX-es-o1L">
@@ -417,10 +417,10 @@
                                                             </connections>
                                                         </collectionView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3g-ye-fYG">
-                                                            <rect key="frame" x="205.66666666666666" y="522" width="83.999999999999972" height="60"/>
+                                                            <rect key="frame" x="221.66666666666663" y="512" width="80" height="80"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="Vrn-9Z-zDQ"/>
-                                                                <constraint firstAttribute="height" constant="60" id="hK1-23-MND"/>
+                                                                <constraint firstAttribute="height" constant="80" id="J4Q-Uu-NBs"/>
+                                                                <constraint firstAttribute="width" constant="80" id="U3d-rb-Gs1"/>
                                                             </constraints>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="like"/>
@@ -438,15 +438,18 @@
                                                         </view>
                                                         <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="h84-LX-WkU">
                                                             <rect key="frame" x="137" y="488" width="116" height="26"/>
+                                                            <color key="pageIndicatorTintColor" red="0.68841105700000005" green="0.1956854998" blue="0.11757633839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <color key="currentPageIndicatorTintColor" systemColor="systemGray4Color"/>
                                                         </pageControl>
                                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="NxW-V8-cYX">
                                                             <rect key="frame" x="185" y="491" width="20" height="20"/>
+                                                            <color key="color" red="0.68841105700000005" green="0.1956854998" blue="0.11757633839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         </activityIndicatorView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GMf-5y-bx2">
-                                                            <rect key="frame" x="80.666666666666686" y="522" width="104" height="60"/>
+                                                            <rect key="frame" x="88.666666666666686" y="512" width="80" height="80"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="DUs-8n-dLg"/>
-                                                                <constraint firstAttribute="height" constant="60" id="zGa-Wb-Tax"/>
+                                                                <constraint firstAttribute="width" constant="80" id="QHb-fs-FGg"/>
+                                                                <constraint firstAttribute="height" constant="80" id="xFe-T4-Suy"/>
                                                             </constraints>
                                                             <state key="normal" title="Button"/>
                                                             <buttonConfiguration key="configuration" style="plain" image="dislike"/>
@@ -457,22 +460,20 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="w3g-ye-fYG" firstAttribute="leading" secondItem="Uqc-iy-yo2" secondAttribute="trailing" constant="24" id="5Da-JI-jZy"/>
                                                         <constraint firstItem="NxW-V8-cYX" firstAttribute="centerX" secondItem="sYx-3j-hnm" secondAttribute="centerX" id="DWV-ka-a3l"/>
-                                                        <constraint firstItem="w3g-ye-fYG" firstAttribute="leading" secondItem="Uqc-iy-yo2" secondAttribute="trailing" constant="8" id="GEp-W3-zU6"/>
+                                                        <constraint firstItem="Uqc-iy-yo2" firstAttribute="top" secondItem="h84-LX-WkU" secondAttribute="bottom" constant="13" id="F9E-8W-jo6"/>
+                                                        <constraint firstItem="GMf-5y-bx2" firstAttribute="centerY" secondItem="Uqc-iy-yo2" secondAttribute="centerY" id="Gyj-Dx-q8Q"/>
                                                         <constraint firstAttribute="trailing" secondItem="H6q-6V-Wkg" secondAttribute="trailing" constant="8" id="HO1-PP-yr0"/>
-                                                        <constraint firstItem="GMf-5y-bx2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sYx-3j-hnm" secondAttribute="leading" constant="20" symbolic="YES" id="I0J-gk-TBO"/>
-                                                        <constraint firstItem="Uqc-iy-yo2" firstAttribute="leading" secondItem="GMf-5y-bx2" secondAttribute="trailing" constant="8" id="Jd6-xO-u3M"/>
-                                                        <constraint firstItem="GMf-5y-bx2" firstAttribute="centerY" secondItem="Uqc-iy-yo2" secondAttribute="centerY" id="T3p-g2-q0D"/>
                                                         <constraint firstItem="h84-LX-WkU" firstAttribute="top" secondItem="H6q-6V-Wkg" secondAttribute="bottom" constant="8" id="Td2-w7-sJf"/>
-                                                        <constraint firstItem="w3g-ye-fYG" firstAttribute="centerY" secondItem="Uqc-iy-yo2" secondAttribute="centerY" id="Xsz-Ng-LkY"/>
-                                                        <constraint firstItem="GMf-5y-bx2" firstAttribute="top" secondItem="h84-LX-WkU" secondAttribute="bottom" constant="8" id="Ycp-WU-d3m"/>
+                                                        <constraint firstItem="Uqc-iy-yo2" firstAttribute="leading" secondItem="GMf-5y-bx2" secondAttribute="trailing" constant="24" id="bq1-FZ-gow"/>
                                                         <constraint firstItem="H6q-6V-Wkg" firstAttribute="centerX" secondItem="sYx-3j-hnm" secondAttribute="centerX" id="eG3-uQ-oFI"/>
                                                         <constraint firstItem="NxW-V8-cYX" firstAttribute="centerY" secondItem="h84-LX-WkU" secondAttribute="centerY" id="eMZ-le-Fvb"/>
+                                                        <constraint firstItem="w3g-ye-fYG" firstAttribute="centerY" secondItem="Uqc-iy-yo2" secondAttribute="centerY" id="hMq-zI-3mU"/>
                                                         <constraint firstItem="H6q-6V-Wkg" firstAttribute="leading" secondItem="sYx-3j-hnm" secondAttribute="leading" constant="8" id="k1i-bw-1Zq"/>
                                                         <constraint firstItem="H6q-6V-Wkg" firstAttribute="top" secondItem="sYx-3j-hnm" secondAttribute="top" constant="8" id="o23-Jn-68X"/>
                                                         <constraint firstAttribute="bottom" secondItem="Uqc-iy-yo2" secondAttribute="bottom" constant="25" id="qVo-2m-O6k"/>
                                                         <constraint firstItem="Uqc-iy-yo2" firstAttribute="centerX" secondItem="sYx-3j-hnm" secondAttribute="centerX" id="tD9-u4-V6b"/>
-                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="w3g-ye-fYG" secondAttribute="trailing" constant="20" symbolic="YES" id="tsi-jg-W1O"/>
                                                         <constraint firstItem="h84-LX-WkU" firstAttribute="centerX" secondItem="sYx-3j-hnm" secondAttribute="centerX" id="v62-Wu-AwC"/>
                                                     </constraints>
                                                 </view>
