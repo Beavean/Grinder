@@ -26,7 +26,7 @@ class FirebaseListener {
         } else {
             if let lastDocumentSnapshot = lastDocumentSnapshot {
                 query = FirebaseReference(.User).order(by: K.registeredDate, descending: false).limit(to: limit).start(afterDocument: lastDocumentSnapshot)
-                print("DEBUG: Next user loading from limi \(limit)")
+                print("DEBUG: Next user loading from limit \(limit)")
             } else {
                 print("DEBUG: last snapshot is nil")
             }
