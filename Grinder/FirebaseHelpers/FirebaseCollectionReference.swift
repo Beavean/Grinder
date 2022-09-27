@@ -9,6 +9,7 @@ import FirebaseFirestore
 
 enum FirebaseCollectionReference: String {
     case User
+    case Like
 }
 
 func FirebaseReference(_ collectionReference: FirebaseCollectionReference) -> CollectionReference {

@@ -59,7 +59,12 @@ class UserProfileTableViewController: UITableViewController {
         dismissView()
     }
     
+    
+    
+    
     @IBAction func likeButtonPressed(_ sender: UIButton) {
+        guard let objectID = userObject?.objectID else { return }
+        saveLikeToUser(userID: objectID)
         dismissView()
     }
     
@@ -173,13 +178,30 @@ class UserProfileTableViewController: UITableViewController {
         guard let currentUser = FirebaseUser.currentUser(),
               let likedUserArray = currentUser.likedUsersArray,
               let objectID = userObject?.objectID else { return }
-        likeButton.isEnabled = likedUserArray.contains(objectID)
+        likeButton.alpha = likedUserArray.contains(objectID) ? 0.5 : 1
+        likeButton.isEnabled = !likedUserArray.contains(objectID)
     }
     
     //MARK: - Helpers
     
     private func dismissView() {
         self.dismiss(animated: true)
+    }
+    
+    //MARK: - Like saving
+    
+    private func saveLikeToUser(userID: String?) {
+        guard let userID = userID, let currentUserID = FirebaseUser.currentID() else { return }
+        let like = LikedObject(id: UUID().uuidString, userID: currentUserID, likedUserID: userID, date: Date())
+        like.saveToFirestore()
+        if let currentUser = FirebaseUser.currentUser(), var likedArray = currentUser.likedUsersArray {
+            if !likedArray.contains(userID) {
+                likedArray.append(userID)
+                currentUser.updateCurrentUserInFireStore(withValues: [K.likedUsersArray: likedArray]) { error in
+                    print("DEBUG: Updated current with error: \(String(describing: error?.localizedDescription))")
+                }
+            }
+        }
     }
 }
 

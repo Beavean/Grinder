@@ -23,7 +23,7 @@ class CardViewController: UIViewController {
     var isInitialLoad = true
     var showReserve = false
     var numberOfCardsAdded = 0
-    var initialLoadNumber = 4
+    var initialLoadNumber = 20
     
     //MARK: - Lifecycle
     

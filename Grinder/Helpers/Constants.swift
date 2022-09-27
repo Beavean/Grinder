@@ -33,6 +33,14 @@ struct K {
     static let pushID = "pushID"
     static let currentUser = "currentUser"
     
+    //MARK: - User match
+    
+    static let likingUserID = "userID"
+    static let likeDate = "date"
+    static let likedUserID = "likedUserID"
+    static let memberIDs = "memberIDs"
+
+    
     //MARK: - Storyboard Identifiers
     
     static let mainViewIdentifier = "MainView"

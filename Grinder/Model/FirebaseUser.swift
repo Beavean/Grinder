@@ -229,6 +229,22 @@ class FirebaseUser: Equatable {
             }
         }
     }
+    
+    //MARK: - Update user methods
+    
+    func updateCurrentUserInFireStore(withValues: [String: Any], completion: @escaping (_ error: Error?) -> Void) {
+        if let dictionary = K.userDefaults.object(forKey: K.currentUser),
+           let userObject = (dictionary as? NSDictionary)?.mutableCopy() as? NSMutableDictionary,
+           let currentUserID = FirebaseUser.currentID() {
+            userObject.setValuesForKeys(withValues)
+            FirebaseReference(.User).document(currentUserID).updateData(withValues) { error in
+                completion(error)
+                if error == nil {
+                    FirebaseUser(dictionary: userObject).saveUserLocally()
+                }
+            }
+        }
+    }
 }
 
 func createUsers() {
