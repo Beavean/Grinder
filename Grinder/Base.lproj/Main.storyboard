@@ -321,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMp-L7-d3S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3529" y="-300"/>
+            <point key="canvasLocation" x="3528" y="-724"/>
         </scene>
         <!--User Profile Table View Controller-->
         <scene sceneID="AVA-Ux-jQU">
@@ -733,7 +733,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j7x-1z-eYP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4433.8461538461534" y="-300"/>
+            <point key="canvasLocation" x="5473.8461538461534" y="2.8436018957345972"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="noH-NA-raY">
@@ -746,12 +746,80 @@
                     </tabBar>
                     <connections>
                         <segue destination="wzX-wM-WfK" kind="relationship" relationship="viewControllers" id="U4Y-qd-CFz"/>
+                        <segue destination="7sU-0E-e7b" kind="relationship" relationship="viewControllers" id="YFH-ay-1cg"/>
                         <segue destination="Lxr-qb-evt" kind="relationship" relationship="viewControllers" id="ETs-6t-x3R"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbZ-en-AGr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1686" y="3"/>
+        </scene>
+        <!--Likes-->
+        <scene sceneID="xRD-NM-BLS">
+            <objects>
+                <viewController id="zHa-NK-QQP" customClass="NotificationsViewController" customModule="Grinder" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OI9-mR-Vgi">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KTa-ei-JUB">
+                                <rect key="frame" x="0.0" y="91" width="390" height="670"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Ppt-J8-c1H">
+                                        <rect key="frame" x="0.0" y="50" width="390" height="80"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ppt-J8-c1H" id="FH9-lh-fjp">
+                                            <rect key="frame" x="0.0" y="0.0" width="359.66666666666669" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="PjL-0M-eo4">
+                                                    <rect key="frame" x="16" y="10" width="60" height="60"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="9cd-FG-jdp"/>
+                                                        <constraint firstAttribute="height" constant="60" id="DY4-QR-DeW"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGf-uX-k9W">
+                                                    <rect key="frame" x="84" y="28.666666666666671" width="267.66666666666669" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XGf-uX-k9W" firstAttribute="centerY" secondItem="FH9-lh-fjp" secondAttribute="centerY" id="3XM-7X-s9w"/>
+                                                <constraint firstAttribute="trailing" secondItem="XGf-uX-k9W" secondAttribute="trailing" constant="8" id="HH1-AW-FJh"/>
+                                                <constraint firstItem="PjL-0M-eo4" firstAttribute="centerY" secondItem="FH9-lh-fjp" secondAttribute="centerY" id="IP8-Je-Ex4"/>
+                                                <constraint firstItem="PjL-0M-eo4" firstAttribute="leading" secondItem="FH9-lh-fjp" secondAttribute="leading" constant="16" id="VRT-BT-dBN"/>
+                                                <constraint firstItem="XGf-uX-k9W" firstAttribute="leading" secondItem="PjL-0M-eo4" secondAttribute="trailing" constant="8" symbolic="YES" id="ZKn-7u-tSl"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zHa-NK-QQP" id="l2n-sg-SCj"/>
+                                    <outlet property="delegate" destination="zHa-NK-QQP" id="8bU-H3-HWR"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="FWj-3i-vsl"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KTa-ei-JUB" firstAttribute="top" secondItem="FWj-3i-vsl" secondAttribute="top" id="8Gc-8G-ZJ3"/>
+                            <constraint firstItem="KTa-ei-JUB" firstAttribute="trailing" secondItem="FWj-3i-vsl" secondAttribute="trailing" id="Xkr-76-r6r"/>
+                            <constraint firstItem="KTa-ei-JUB" firstAttribute="leading" secondItem="FWj-3i-vsl" secondAttribute="leading" id="pZx-Nl-U7y"/>
+                            <constraint firstItem="KTa-ei-JUB" firstAttribute="bottom" secondItem="FWj-3i-vsl" secondAttribute="bottom" id="yLK-cf-VzT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Likes" id="aF2-2T-gGX"/>
+                    <connections>
+                        <outlet property="notificationsTableView" destination="KTa-ei-JUB" id="jMu-Ug-APf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OLc-GP-3cf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3521.5384615384614" y="3.5545023696682461"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="akH-80-IfD">
@@ -770,7 +838,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KXN-FE-73y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2593.8461538461538" y="-300"/>
+            <point key="canvasLocation" x="2594" y="-724"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zP9-zQ-HlN">
@@ -789,7 +857,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AhA-3n-sed" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2594" y="390"/>
+            <point key="canvasLocation" x="2594" y="861"/>
         </scene>
         <!--Profile-->
         <scene sceneID="h0N-vr-XB7">
@@ -1169,13 +1237,33 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qdi-A9-kUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3527.6923076923076" y="389.57345971563979"/>
+            <point key="canvasLocation" x="3528" y="861"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ijE-6p-WY7">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7sU-0E-e7b" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" selectedImage="bell.fill" catalog="system" id="kvm-fJ-JXO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jdg-VR-Acg">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zHa-NK-QQP" kind="relationship" relationship="rootViewController" id="RHr-RL-FfM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Eqg-KV-AQj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2594" y="4"/>
         </scene>
     </scenes>
     <resources>
         <image name="Button_sign in" width="316" height="55"/>
         <image name="avatar" width="184" height="184"/>
         <image name="back" width="11" height="19"/>
+        <image name="bell.fill" catalog="system" width="123" height="128"/>
         <image name="camera" width="60" height="60"/>
         <image name="dislike" width="80" height="80"/>
         <image name="edit" width="80" height="80"/>

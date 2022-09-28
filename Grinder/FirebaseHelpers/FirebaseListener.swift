@@ -72,7 +72,47 @@ class FirebaseListener {
         }
     }
     
+    func downloadUsersFromFirestore(withIDs: [String], completion: @escaping (_ users: [FirebaseUser]) -> Void) {
+        var usersArray = [FirebaseUser]()
+        var counter = 0
+        for userID in withIDs {
+            FirebaseReference(.User).document(userID).getDocument { snapShot, error in
+                guard let snapShot = snapShot else { return }
+                if snapShot.exists, let dictionary = snapShot.data() as? NSDictionary {
+                    let user = FirebaseUser(dictionary: dictionary)
+                    usersArray.append(user)
+                    counter += 1
+                    if counter == withIDs.count {
+                        completion(usersArray)
+                    }
+                } else {
+                    completion(usersArray)
+                }
+            }
+        }
+    }
+    
     //MARK: - Likes
+    
+    func downloadUserLikes(completion: @escaping (_ likedUserIDs: [String]) -> Void) {
+        guard let currentUserID = FirebaseUser.currentID() else { return }
+        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: currentUserID).getDocuments { snapShot, error in
+            var allLikedIDs: [String] = []
+            guard let snapShot = snapShot else {
+                completion(allLikedIDs)
+                return
+            }
+            if !snapShot.isEmpty {
+                for likeDictionary in snapShot.documents {
+                    allLikedIDs.append(likeDictionary[K.likingUserID] as? String ?? "")
+                }
+                completion(allLikedIDs)
+            } else {
+                print("DEBUG: No likes found")
+                completion(allLikedIDs)
+            }
+        }
+    }
     
     func checkIfUserLikedUs(userID: String, completion: @escaping (_ didLike: Bool) -> Void) {
         guard let currentUserID = FirebaseUser.currentID() else { return }
