@@ -71,4 +71,14 @@ class FirebaseListener {
             }
         }
     }
+    
+    //MARK: - Likes
+    
+    func checkIfUserLikedUs(userID: String, completion: @escaping (_ didLike: Bool) -> Void) {
+        guard let currentUserID = FirebaseUser.currentID() else { return }
+        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: currentUserID).whereField(K.likingUserID, isEqualTo: userID).getDocuments { snapShot, error in
+            guard let snapShot = snapShot else { return }
+            completion(!snapShot.isEmpty)
+        }
+    }
 }

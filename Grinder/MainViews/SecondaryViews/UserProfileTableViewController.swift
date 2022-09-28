@@ -8,6 +8,11 @@
 import UIKit
 import SKPhotoBrowser
 
+protocol UserProfileTableViewControllerDelegate {
+    func didLikeUser()
+    func didDislikeUser()
+}
+
 class UserProfileTableViewController: UITableViewController {
     
     //MARK: - IBOutlets
@@ -31,6 +36,7 @@ class UserProfileTableViewController: UITableViewController {
     //MARK: - Properties
     
     var userObject: FirebaseUser?
+    var delegate: UserProfileTableViewControllerDelegate?
     var allImages = [UIImage]()
     private let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
     
@@ -54,15 +60,13 @@ class UserProfileTableViewController: UITableViewController {
     
     //MARK: - IBActions
     
-    
     @IBAction func dislikeButtonPressed(_ sender: UIButton) {
+        self.delegate?.didDislikeUser()
         dismissView()
     }
     
-    
-    
-    
     @IBAction func likeButtonPressed(_ sender: UIButton) {
+        self.delegate?.didLikeUser()
         guard let objectID = userObject?.objectID else { return }
         saveLikeToUser(userID: objectID)
         dismissView()
@@ -186,22 +190,6 @@ class UserProfileTableViewController: UITableViewController {
     
     private func dismissView() {
         self.dismiss(animated: true)
-    }
-    
-    //MARK: - Like saving
-    
-    private func saveLikeToUser(userID: String?) {
-        guard let userID = userID, let currentUserID = FirebaseUser.currentID() else { return }
-        let like = LikedObject(id: UUID().uuidString, userID: currentUserID, likedUserID: userID, date: Date())
-        like.saveToFirestore()
-        if let currentUser = FirebaseUser.currentUser(), var likedArray = currentUser.likedUsersArray {
-            if !likedArray.contains(userID) {
-                likedArray.append(userID)
-                currentUser.updateCurrentUserInFireStore(withValues: [K.likedUsersArray: likedArray]) { error in
-                    print("DEBUG: Updated current with error: \(String(describing: error?.localizedDescription))")
-                }
-            }
-        }
     }
 }
 

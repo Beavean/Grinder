@@ -99,6 +99,7 @@ class CardViewController: UIViewController {
     private func showUserProfileFor(userID: String) {
         let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.userProfileControllerIdentifier) as! UserProfileTableViewController
         profileView.userObject = getUserWithId(userID: userID)
+        profileView.delegate = self
         self.present(profileView, animated: true)
     }
     
@@ -111,6 +112,18 @@ class CardViewController: UIViewController {
             }
         }
         return nil
+    }
+    
+    private func checkForLikesWith(userID: String) {
+        print("DEBUG: Checking for like with user \(userID)")
+        if !didLikeUserWith(userID: userID) {
+            saveLikeToUser(userID: userID)
+        }
+        FirebaseListener.shared.checkIfUserLikedUs(userID: userID) { didLike in
+            if didLike {
+                print("DEBUG: Create a match")
+            }
+        }
     }
 }
 
@@ -144,11 +157,26 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {
-        print("DEBUG: Swipe to  \(direction)")
+        if direction == .right {
+            let user = getUserWithId(userID: showReserve ? self.secondCardModels[index].id : self.initialCardModels[index].id)
+            guard let userID = user?.objectID else { return }
+            checkForLikesWith(userID: userID)
+        }
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSelectCardAt index: Int) {
         let userID = showReserve ? self.secondCardModels[index].id : self.initialCardModels[index].id
         showUserProfileFor(userID: userID)
+    }
+}
+
+extension CardViewController: UserProfileTableViewControllerDelegate {
+    
+    func didLikeUser() {
+        cardStack.swipe(.right, animated: true)
+    }
+    
+    func didDislikeUser() {
+        cardStack.swipe(.left, animated: true)
     }
 }

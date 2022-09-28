@@ -18,6 +18,7 @@
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
+		08D76F9C28E447C5007B43DA /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9B28E447C5007B43DA /* GlobalFunctions.swift */; };
 		08F04E3628DDC916002D2A16 /* FileStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3528DDC916002D2A16 /* FileStorage.swift */; };
 		08F04E3928DEF74F002D2A16 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3828DEF74F002D2A16 /* CardViewController.swift */; };
 		08F04E3C28DF0EEB002D2A16 /* UserCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F04E3B28DF0EEB002D2A16 /* UserCard.swift */; };
@@ -52,6 +53,7 @@
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
+		08D76F9B28E447C5007B43DA /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		08F04E3528DDC916002D2A16 /* FileStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorage.swift; sourceTree = "<group>"; };
 		08F04E3828DEF74F002D2A16 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 		08F04E3B28DF0EEB002D2A16 /* UserCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCard.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				08F2376D28DB40C000D7A511 /* Constants.swift */,
+				08D76F9B28E447C5007B43DA /* GlobalFunctions.swift */,
 				08F04E4628DF1D72002D2A16 /* Extensions */,
 			);
 			path = Helpers;
@@ -352,6 +355,7 @@
 				08F04E4E28DF1DF9002D2A16 /* UIView+Anchors&Shadow.swift in Sources */,
 				08B3FEED28DC78D80008E317 /* NSAttributedString+Attributes.swift in Sources */,
 				08F04E4328DF1603002D2A16 /* UserCardContentView.swift in Sources */,
+				08D76F9C28E447C5007B43DA /* GlobalFunctions.swift in Sources */,
 				08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */,
 				08F04E3F28DF1115002D2A16 /* UserCardModel.swift in Sources */,
 				08F2377328DB48EF00D7A511 /* FirebaseCollectionReference.swift in Sources */,
