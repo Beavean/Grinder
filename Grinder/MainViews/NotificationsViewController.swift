@@ -51,7 +51,17 @@ class NotificationsViewController: UIViewController {
             }
         }
     }
+    
+    //MARK: - Navigation
+    
+    private func showUserProfileFor(user: FirebaseUser) {
+        let profileView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.userProfileControllerIdentifier) as! UserProfileTableViewController
+        profileView.userObject = user
+        self.navigationController?.pushViewController(profileView, animated: true)
+    }
 }
+
+//MARK: - UITableViewDataSource
 
 extension NotificationsViewController: UITableViewDataSource {
     
@@ -66,7 +76,12 @@ extension NotificationsViewController: UITableViewDataSource {
     }
 }
 
+//MARK: - UITableViewDelegate
+
 extension NotificationsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        showUserProfileFor(user: allUsers[indexPath.row])
+    }
 }
 
