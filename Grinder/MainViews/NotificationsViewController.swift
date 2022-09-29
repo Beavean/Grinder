@@ -22,8 +22,14 @@ class NotificationsViewController: UIViewController {
     
     //MARK: - Lifecycle
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        downloadLikes()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        notificationsTableView.tableFooterView = UIView()
         downloadLikes()
     }
     
@@ -54,7 +60,9 @@ extension NotificationsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.likeTableViewCellIdentifier, for: indexPath) as? LikeTableViewCell else { return UITableViewCell() }
+        cell.setupCell(user: allUsers[indexPath.row])
+        return cell
     }
 }
 

@@ -47,6 +47,7 @@ struct K {
     static let loginViewIdentifier = "LoginView"
     static let userProfileControllerIdentifier = "UserProfileTableViewController"
     static let imageCollectionViewCellIdentifier = "ImageCollectionViewCell"
+    static let likeTableViewCellIdentifier = "LikeTableViewCell"
 }
 
 

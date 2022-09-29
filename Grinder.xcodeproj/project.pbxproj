@@ -15,6 +15,7 @@
 		088C90DE28DA38450032650A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 088C90DD28DA38450032650A /* GoogleService-Info.plist */; };
 		08B3FEED28DC78D80008E317 /* NSAttributedString+Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3FEEC28DC78D80008E317 /* NSAttributedString+Attributes.swift */; };
 		08B3FEEF28DC8F910008E317 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */; };
+		08B5DCC128E623D500EC0FE8 /* LikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -51,6 +52,7 @@
 		088C90DD28DA38450032650A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		08B3FEEC28DC78D80008E317 /* NSAttributedString+Attributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Attributes.swift"; sourceTree = "<group>"; };
 		08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */,
+				08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 				08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */,
 				08F04E4C28DF1DD4002D2A16 /* UIImage+circleMasked.swift in Sources */,
 				08F04E4528DF1CCB002D2A16 /* UserCardFooterView.swift in Sources */,
+				08B5DCC128E623D500EC0FE8 /* LikeTableViewCell.swift in Sources */,
 				08DE162428E4942300F19FD6 /* NotificationsViewController.swift in Sources */,
 				08F04E3628DDC916002D2A16 /* FileStorage.swift in Sources */,
 				08F04E4E28DF1DF9002D2A16 /* UIView+Anchors&Shadow.swift in Sources */,
