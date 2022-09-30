@@ -18,6 +18,7 @@
 		08B5DCC128E623D500EC0FE8 /* LikeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */; };
 		08B5DCC328E629B200EC0FE8 /* MatchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC228E629B100EC0FE8 /* MatchObject.swift */; };
 		08B5DCC528E62C9700EC0FE8 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */; };
+		08B5DCC728E7040600EC0FE8 /* NewMatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -57,6 +58,7 @@
 		08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeTableViewCell.swift; sourceTree = "<group>"; };
 		08B5DCC228E629B100EC0FE8 /* MatchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchObject.swift; sourceTree = "<group>"; };
 		08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
+		08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */,
 				08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */,
+				08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 				08F04E4828DF1D9C002D2A16 /* Date+String&Interval.swift in Sources */,
 				08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */,
 				08B5DCC328E629B200EC0FE8 /* MatchObject.swift in Sources */,
+				08B5DCC728E7040600EC0FE8 /* NewMatchCollectionViewCell.swift in Sources */,
 				08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */,
 				08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */,
 				08B3FEEF28DC8F910008E317 /* ProfileTableViewController.swift in Sources */,
