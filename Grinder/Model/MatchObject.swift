@@ -14,7 +14,7 @@ struct MatchObject {
     let date: Date
     
     var dictionary: [String: Any] {
-        return [K.objectID: id, K.memberIDs: memberIDs, K.likeDate: date]
+        return [K.objectID: id, K.memberIDs: memberIDs, K.date: date]
     }
     
     func saveToFirestore() {

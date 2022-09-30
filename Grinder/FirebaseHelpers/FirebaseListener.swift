@@ -127,7 +127,7 @@ class FirebaseListener {
     func downloadUserMatches(completion: @escaping (_ matchUserIDs: [String]) -> Void) {
         let lastMonth = Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date()
         guard let currentID = FirebaseUser.currentID() else { return }
-        FirebaseReference(.Match).whereField(K.memberIDs, arrayContains: currentID).whereField(K.likeDate, isGreaterThan: lastMonth).order(by: K.likeDate, descending: true).getDocuments { snapshot, error in
+        FirebaseReference(.Match).whereField(K.memberIDs, arrayContains: currentID).whereField(K.date, isGreaterThan: lastMonth).order(by: K.date, descending: true).getDocuments { snapshot, error in
             var allMatchIDs = [String]()
             guard let snapshot = snapshot else { return }
             if !snapshot.isEmpty {

@@ -15,7 +15,7 @@ struct LikedObject {
     let date: Date
     
     var dictionary: [String: Any] {
-        return [K.objectID: id, K.likingUserID: userID, K.likedUsersArray: likedUserID, K.likeDate: date]
+        return [K.objectID: id, K.likingUserID: userID, K.likedUsersArray: likedUserID, K.date: date]
     }
     
     func saveToFirestore() {

@@ -36,7 +36,7 @@ struct K {
     //MARK: - User match
     
     static let likingUserID = "userID"
-    static let likeDate = "date"
+    static let date = "date"
     static let likedUserID = "likedUserID"
     static let memberIDs = "memberIDs"
 
@@ -51,6 +51,17 @@ struct K {
     static let matchViewIdentifier = "MatchViewController"
     static let newMatchCollectionViewCellIdentifier = "NewMatchCollectionViewCell"
     static let recentTableViewCellIdentifier = "RecentTableViewCell"
+    
+    //MARK: - Recents
+    
+    static let chatRoomID = "chatRoomID"
+    static let senderID = "senderID"
+    static let senderName = "senderName"
+    static let receiverID = "receiverID"
+    static let receiverName = "receiverName"
+    static let lastMessage = "lastMessage"
+    static let unreadCounter = "unreadCounter"
+
 }
 
 

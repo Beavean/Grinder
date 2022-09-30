@@ -21,6 +21,7 @@
 		08B5DCC728E7040600EC0FE8 /* NewMatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */; };
 		08B5DCC928E705CB00EC0FE8 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */; };
 		08B5DCCB28E707F400EC0FE8 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */; };
+		08B5DCCD28E723FA00EC0FE8 /* RecentChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -63,6 +64,7 @@
 		08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchCollectionViewCell.swift; sourceTree = "<group>"; };
 		08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
+		08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChat.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				08D76F9928E37B29007B43DA /* LikedObject.swift */,
 				08B5DCC228E629B100EC0FE8 /* MatchObject.swift */,
 				08F04E3D28DF10F5002D2A16 /* CardViews */,
+				08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */,
 				08F04E4C28DF1DD4002D2A16 /* UIImage+circleMasked.swift in Sources */,
 				08F04E4528DF1CCB002D2A16 /* UserCardFooterView.swift in Sources */,
+				08B5DCCD28E723FA00EC0FE8 /* RecentChat.swift in Sources */,
 				08B5DCC128E623D500EC0FE8 /* LikeTableViewCell.swift in Sources */,
 				08DE162428E4942300F19FD6 /* NotificationsViewController.swift in Sources */,
 				08F04E3628DDC916002D2A16 /* FileStorage.swift in Sources */,
