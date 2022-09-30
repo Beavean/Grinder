@@ -103,6 +103,13 @@ class CardViewController: UIViewController {
         self.present(profileView, animated: true)
     }
     
+    private func showMatchView(userID: String) {
+        let matchView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.matchViewIdentifier) as! MatchViewController
+        matchView.user = getUserWithId(userID: userID)
+        matchView.delegate = self
+        self.present(matchView, animated: true)
+    }
+    
     //MARK: - Helpers
     
     private func getUserWithId(userID: String) -> FirebaseUser? {
@@ -121,7 +128,8 @@ class CardViewController: UIViewController {
         }
         FirebaseListener.shared.checkIfUserLikedUs(userID: userID) { didLike in
             if didLike {
-                print("DEBUG: Create a match")
+                FirebaseListener.shared.saveMatch(userID: userID)
+                self.showMatchView(userID: userID)
             }
         }
     }
@@ -178,5 +186,17 @@ extension CardViewController: UserProfileTableViewControllerDelegate {
     
     func didDislikeUser() {
         cardStack.swipe(.left, animated: true)
+    }
+}
+
+extension CardViewController: MatchViewControllerDelegate {
+    
+    func didClickSendMessage(to user: FirebaseUser) {
+        print("DEBUG: Start chat with  \(user)")
+        //TODO: Start chat
+    }
+    
+    func didClickKeepSwiping() {
+        print("DEBUG: Keep swiping")
     }
 }

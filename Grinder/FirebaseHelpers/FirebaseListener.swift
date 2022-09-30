@@ -121,4 +121,12 @@ class FirebaseListener {
             completion(!snapShot.isEmpty)
         }
     }
+    
+    //MARK: - Match
+    
+    func saveMatch(userID: String) {
+        guard let currentID = FirebaseUser.currentID() else { return }
+        let match = MatchObject(id: UUID().uuidString, memberIDs: [currentID, userID], date: Date())
+        match.saveToFirestore()
+    }
 }

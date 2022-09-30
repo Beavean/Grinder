@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol MatchViewControllerDelegate {
+    
+    func didClickSendMessage(to user: FirebaseUser)
+    func didClickKeepSwiping()
+}
+
 class MatchViewController: UIViewController {
     
     //MARK: - IBOUtlets
@@ -20,6 +26,7 @@ class MatchViewController: UIViewController {
     //MARK: - Properties
     
     var user: FirebaseUser?
+    var delegate: MatchViewControllerDelegate?
     
     //MARK: - Lifecycle
     
@@ -31,11 +38,14 @@ class MatchViewController: UIViewController {
     //MARK: - IBActions
     
     @IBAction func sendMessageButtonPressed(_ sender: Any) {
-        
+        guard let user = user else { return }
+        delegate?.didClickSendMessage(to: user)
+        self.dismiss(animated: true)
     }
     
     @IBAction func keepSwipingButtonPressed(_ sender: Any) {
-        
+        delegate?.didClickKeepSwiping()
+        self.dismiss(animated: true)
     }
     
     //MARK: - Setup

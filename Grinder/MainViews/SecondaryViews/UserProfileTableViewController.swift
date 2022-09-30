@@ -38,6 +38,7 @@ class UserProfileTableViewController: UITableViewController {
     var userObject: FirebaseUser?
     var delegate: UserProfileTableViewControllerDelegate?
     var allImages = [UIImage]()
+    var isMatchedUser = false
     private let sectionInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 5)
     
     //MARK: - Lifecycle
@@ -56,20 +57,36 @@ class UserProfileTableViewController: UITableViewController {
         super.viewDidLoad()
         setupBackgrounds()
         hideActivityIndicator()
+        if isMatchedUser {
+            updateUIForMatchedUser()
+        }
     }
     
     //MARK: - IBActions
     
     @IBAction func dislikeButtonPressed(_ sender: UIButton) {
         self.delegate?.didDislikeUser()
-        dismissView()
+        if self.navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismissView()
+        }
     }
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
         self.delegate?.didLikeUser()
         guard let objectID = userObject?.objectID else { return }
-        saveLikeToUser(userID: objectID)
-        dismissView()
+        if self.navigationController != nil {
+            saveLikeToUser(userID: objectID)
+            FirebaseListener.shared.saveMatch(userID: objectID)
+            showMatchView()
+        } else {
+            dismissView()
+        }
+    }
+    
+    @objc func startChatButtonPressed() {
+        print("DEBUG: Start chat with user")
     }
     
     //MARK: -  TableViewDelegate
@@ -99,6 +116,17 @@ class UserProfileTableViewController: UITableViewController {
         sectionThreeView.layer.cornerRadius = 10
         sectionFourView.layer.cornerRadius = 10
         pageControl.isHidden = true
+    }
+    
+    private func updateUIForMatchedUser() {
+        self.likeButton.isHidden = isMatchedUser
+        self.dislikeButton.isHidden = isMatchedUser
+        showStartChatButton()
+    }
+    
+    private func showStartChatButton() {
+        let messageButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(startChatButtonPressed))
+        self.navigationItem.rightBarButtonItem = isMatchedUser ? messageButton : nil
     }
     
     //MARK: - Show user profile
@@ -191,6 +219,16 @@ class UserProfileTableViewController: UITableViewController {
     private func dismissView() {
         self.dismiss(animated: true)
     }
+    
+    //MARK: - Navigation
+    
+    private func showMatchView() {
+        guard let userObject = userObject else { return }
+        let matchView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: K.matchViewIdentifier) as! MatchViewController
+        matchView.user = userObject
+        matchView.delegate = self
+        self.present(matchView, animated: true)
+    }
 }
 
 extension UserProfileTableViewController: UICollectionViewDataSource {
@@ -233,5 +271,19 @@ extension UserProfileTableViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionInsets.left
+    }
+}
+
+extension UserProfileTableViewController: MatchViewControllerDelegate {
+    
+    func didClickSendMessage(to user: FirebaseUser) {
+        updateLikeButtonStatus()
+        print("DEBUG: Start chat with  \(user)")
+        //TODO: Start chat
+    }
+    
+    func didClickKeepSwiping() {
+        updateLikeButtonStatus()
+        print("DEBUG: Keep swiping")
     }
 }
