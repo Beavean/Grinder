@@ -19,6 +19,8 @@
 		08B5DCC328E629B200EC0FE8 /* MatchObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC228E629B100EC0FE8 /* MatchObject.swift */; };
 		08B5DCC528E62C9700EC0FE8 /* MatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */; };
 		08B5DCC728E7040600EC0FE8 /* NewMatchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */; };
+		08B5DCC928E705CB00EC0FE8 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */; };
+		08B5DCCB28E707F400EC0FE8 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -59,6 +61,8 @@
 		08B5DCC228E629B100EC0FE8 /* MatchObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchObject.swift; sourceTree = "<group>"; };
 		08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchViewController.swift; sourceTree = "<group>"; };
 		08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMatchCollectionViewCell.swift; sourceTree = "<group>"; };
+		08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
+		08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -151,6 +155,7 @@
 				08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */,
 				08B5DCC028E623D500EC0FE8 /* LikeTableViewCell.swift */,
 				08B5DCC628E7040500EC0FE8 /* NewMatchCollectionViewCell.swift */,
+				08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */,
 			);
 			path = CustomCells;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			children = (
 				08F04E3828DEF74F002D2A16 /* CardViewController.swift */,
 				08DE162328E4942300F19FD6 /* NotificationsViewController.swift */,
+				08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */,
 				08B3FEEE28DC8F910008E317 /* ProfileTableViewController.swift */,
 				08D76F9528E33940007B43DA /* SecondaryViews */,
 			);
@@ -384,6 +390,7 @@
 				08B5DCC728E7040600EC0FE8 /* NewMatchCollectionViewCell.swift in Sources */,
 				08F2376C28DB257800D7A511 /* FirebaseUser.swift in Sources */,
 				08F2376828DB1B8E00D7A511 /* WelcomeViewController.swift in Sources */,
+				08B5DCCB28E707F400EC0FE8 /* RecentViewController.swift in Sources */,
 				08B3FEEF28DC8F910008E317 /* ProfileTableViewController.swift in Sources */,
 				08F04E3928DEF74F002D2A16 /* CardViewController.swift in Sources */,
 				08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */,
@@ -391,6 +398,7 @@
 				088C90CA28DA33EB0032650A /* AppDelegate.swift in Sources */,
 				08F04E4128DF1171002D2A16 /* UserCardOverlay.swift in Sources */,
 				08F04E3C28DF0EEB002D2A16 /* UserCard.swift in Sources */,
+				08B5DCC928E705CB00EC0FE8 /* RecentTableViewCell.swift in Sources */,
 				088C90CC28DA33EB0032650A /* SceneDelegate.swift in Sources */,
 				08F2376E28DB40C000D7A511 /* Constants.swift in Sources */,
 			);

@@ -326,7 +326,7 @@
         <!--Match list-->
         <scene sceneID="2oh-Zy-fNo">
             <objects>
-                <viewController id="wp4-RE-bag" sceneMemberID="viewController">
+                <viewController id="wp4-RE-bag" customClass="RecentViewController" customModule="Grinder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cpb-zw-mXr">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -384,12 +384,16 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="wp4-RE-bag" id="cmM-ea-S23"/>
+                                    <outlet property="delegate" destination="wp4-RE-bag" id="EQL-oK-382"/>
+                                </connections>
                             </collectionView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="r4j-Kz-aYt">
                                 <rect key="frame" x="0.0" y="214.33333333333331" width="390" height="546.66666666666674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="HIU-Y7-9DO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecentTableViewCell" id="HIU-Y7-9DO" customClass="RecentTableViewCell" customModule="Grinder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="390" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HIU-Y7-9DO" id="2fb-Z0-Z7E">
@@ -455,8 +459,20 @@
                                                 <constraint firstItem="9cN-lf-7qC" firstAttribute="leading" secondItem="0Lc-Z0-Hh9" secondAttribute="trailing" id="zrt-fR-vZn"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="0Lc-Z0-Hh9" id="Rse-IS-VdQ"/>
+                                            <outlet property="dateLabel" destination="30f-pG-Ohu" id="8yU-Gz-eAT"/>
+                                            <outlet property="lastMessageLabel" destination="9cN-lf-7qC" id="4I7-oF-NjW"/>
+                                            <outlet property="nameLabel" destination="xv2-3I-M8s" id="jTA-mc-Gf3"/>
+                                            <outlet property="unreadMessageBackgroundView" destination="RaN-d8-64q" id="4N2-Js-qag"/>
+                                            <outlet property="unreadMessageCountLabel" destination="2co-vR-AdU" id="aSl-uW-Syj"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="wp4-RE-bag" id="5Ol-hn-w8f"/>
+                                    <outlet property="delegate" destination="wp4-RE-bag" id="JdO-Sv-o5S"/>
+                                </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Messages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xfC-SV-duE">
                                 <rect key="frame" x="16" y="188" width="358" height="26.333333333333343"/>
@@ -484,6 +500,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Match list" id="qRc-KK-6sS"/>
+                    <connections>
+                        <outlet property="messagesTableView" destination="r4j-Kz-aYt" id="aaP-LP-W4w"/>
+                        <outlet property="newMatchesCollectionView" destination="6Ba-c2-Vkc" id="A2w-iY-oJf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sdX-n2-mYq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

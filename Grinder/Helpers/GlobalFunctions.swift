@@ -7,6 +7,18 @@
 
 import Foundation
 
+//MARK: - Matches
+
+func removeCurrentUserID(userIDs: [String]) -> [String] {
+    var allIDs = userIDs
+    for id in allIDs {
+        if id == FirebaseUser.currentID() {
+            allIDs.remove(at: allIDs.firstIndex(of: id)!)
+        }
+    }
+    return allIDs
+}
+
 //MARK: - Save like to user
 
 func saveLikeToUser(userID: String?) {
