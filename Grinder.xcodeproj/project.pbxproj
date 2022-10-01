@@ -22,6 +22,7 @@
 		08B5DCC928E705CB00EC0FE8 /* RecentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */; };
 		08B5DCCB28E707F400EC0FE8 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */; };
 		08B5DCCD28E723FA00EC0FE8 /* RecentChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */; };
+		08B5DCCF28E87D4100EC0FE8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -65,6 +66,7 @@
 		08B5DCC828E705CB00EC0FE8 /* RecentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentTableViewCell.swift; sourceTree = "<group>"; };
 		08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChat.swift; sourceTree = "<group>"; };
+		08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */,
 				08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */,
+				08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */,
 			);
 			path = SecondaryViews;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */,
 				08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */,
 				088C90CA28DA33EB0032650A /* AppDelegate.swift in Sources */,
+				08B5DCCF28E87D4100EC0FE8 /* ChatViewController.swift in Sources */,
 				08F04E4128DF1171002D2A16 /* UserCardOverlay.swift in Sources */,
 				08F04E3C28DF0EEB002D2A16 /* UserCard.swift in Sources */,
 				08B5DCC928E705CB00EC0FE8 /* RecentTableViewCell.swift in Sources */,

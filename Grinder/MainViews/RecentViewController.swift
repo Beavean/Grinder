@@ -17,6 +17,7 @@ class RecentViewController: UIViewController {
     //MARK: - Properties
     
     var recentMatches = [FirebaseUser]()
+    var recentChats = [RecentChat]()
     
     //MARK: - Lifecycle
     
@@ -27,6 +28,7 @@ class RecentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        downloadRecents()
     }
     
     //MARK: - Download
@@ -46,6 +48,15 @@ class RecentViewController: UIViewController {
         }
     }
     
+    private func downloadRecents() {
+        FirebaseListener.shared.downloadRecentChatsFromFirestore { allRecentItems in
+            self.recentChats = allRecentItems
+            DispatchQueue.main.async {
+                self.messagesTableView.reloadData()
+            }
+        }
+    }
+    
     //MARK: - Navigation
     
     private func showUserProfileFor(user: FirebaseUser) {
@@ -59,11 +70,13 @@ class RecentViewController: UIViewController {
 extension RecentViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return recentChats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: K.recentTableViewCellIdentifier, for: indexPath) as? RecentTableViewCell else { return UITableViewCell() }
+        cell.generateCell(recentChat: recentChats[indexPath.row])
+        return cell
     }
 }
 
@@ -79,6 +92,25 @@ extension RecentViewController: UICollectionViewDataSource {
             cell.setupCell(avatarLink: recentMatches[indexPath.row].avatarLink)
         }
         return cell
+    }
+}
+
+extension RecentViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let recent = self.recentChats[indexPath.row]
+            recent.deleteRecent()
+            self.recentChats.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
 }
 

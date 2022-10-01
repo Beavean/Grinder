@@ -86,7 +86,7 @@ class UserProfileTableViewController: UITableViewController {
     }
     
     @objc func startChatButtonPressed() {
-        print("DEBUG: Start chat with user")
+        goToChat()
     }
     
     //MARK: -  TableViewDelegate
@@ -229,6 +229,13 @@ class UserProfileTableViewController: UITableViewController {
         matchView.delegate = self
         self.present(matchView, animated: true)
     }
+    
+    func goToChat() {
+        let chatRoomID = startChat(user1: FirebaseUser.currentUser()!, user2: userObject!)
+        let chatView = ChatViewController(chatID: chatRoomID, recipientID: userObject!.objectID, recipientName: userObject!.username)
+        chatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(chatView, animated: true)
+    }
 }
 
 extension UserProfileTableViewController: UICollectionViewDataSource {
@@ -277,9 +284,10 @@ extension UserProfileTableViewController: UICollectionViewDelegateFlowLayout {
 extension UserProfileTableViewController: MatchViewControllerDelegate {
     
     func didClickSendMessage(to user: FirebaseUser) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.goToChat()
+        }
         updateLikeButtonStatus()
-        print("DEBUG: Start chat with  \(user)")
-        //TODO: Start chat
     }
     
     func didClickKeepSwiping() {

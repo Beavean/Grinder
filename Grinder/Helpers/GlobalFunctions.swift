@@ -42,6 +42,21 @@ func didLikeUserWith(userID: String) -> Bool {
     return FirebaseUser.currentUser()?.likedUsersArray?.contains(userID) ?? false
 }
 
+//MARK: - Starting chat
+
+func startChat(user1: FirebaseUser, user2: FirebaseUser) -> String {
+    let chatRoomID = chatRoomIDFrom(user1ID: user1.objectID, user2ID: user2.objectID)
+    createRecentItems(chatRoomID: chatRoomID, users: [user1, user2])
+    return chatRoomID
+}
+
+func chatRoomIDFrom(user1ID: String, user2ID: String) -> String {
+    var chatRoomID = String()
+    let value = user1ID.compare(user2ID).rawValue
+    chatRoomID = value < 0 ? user1ID + user2ID : user2ID + user1ID
+    return chatRoomID
+}
+
 //MARK: - Recent chats
 
 func createRecentItems(chatRoomID: String, users: [FirebaseUser]) {
@@ -59,7 +74,7 @@ func createRecentItems(chatRoomID: String, users: [FirebaseUser]) {
             let receiverUser = userID == FirebaseUser.currentID() ? getReceiverFrom(users: users) : FirebaseUser.currentUser()!
             let recentObject = RecentChat()
             recentObject.objectID = UUID().uuidString
-            recentObject.chatRoomID = ""
+            recentObject.chatRoomID = chatRoomID
             recentObject.senderID = senderUser.objectID
             recentObject.senderName = senderUser.username
             recentObject.receiverID = receiverUser.objectID

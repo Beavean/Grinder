@@ -133,6 +133,13 @@ class CardViewController: UIViewController {
             }
         }
     }
+    
+    private func goToChat(user: FirebaseUser) {
+        let chatRoomID = startChat(user1: FirebaseUser.currentUser()!, user2: user)
+        let chatView = ChatViewController(chatID: chatRoomID, recipientID: user.objectID, recipientName: user.username)
+        chatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(chatView, animated: true)
+    }
 }
 
 //MARK: - SwipeCardStackDelegate + DataSource
@@ -192,11 +199,11 @@ extension CardViewController: UserProfileTableViewControllerDelegate {
 extension CardViewController: MatchViewControllerDelegate {
     
     func didClickSendMessage(to user: FirebaseUser) {
-        print("DEBUG: Start chat with  \(user)")
-        //TODO: Start chat
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.goToChat(user: user)
+        }
     }
     
     func didClickKeepSwiping() {
-        print("DEBUG: Keep swiping")
     }
 }

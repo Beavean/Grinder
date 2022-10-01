@@ -147,4 +147,24 @@ class FirebaseListener {
         let match = MatchObject(id: UUID().uuidString, memberIDs: [currentID, userID], date: Date())
         match.saveToFirestore()
     }
+    
+    //MARK: - Recent Chats
+    
+    func downloadRecentChatsFromFirestore(completion: @escaping (_ allRecentItems: [RecentChat]) -> Void) {
+        FirebaseReference(.Recent).whereField(K.senderID, isEqualTo: FirebaseUser.currentUser()).addSnapshotListener { querySnapshot, error in
+            var recentChats = [RecentChat]()
+            guard let snapshot = querySnapshot else { return }
+            if !snapshot.isEmpty {
+                for recentDocument in snapshot.documents {
+                    if recentDocument[K.lastMessage] as! String != "" && recentDocument[K.chatRoomID] != nil && recentDocument[K.objectID] != nil {
+                        recentChats.append(RecentChat(recentDocument.data()))
+                    }
+                }
+                recentChats.sort(by: {$0.date > $1.date})
+                completion(recentChats)
+            } else {
+                completion(recentChats)
+            }
+        }
+    }
 }
