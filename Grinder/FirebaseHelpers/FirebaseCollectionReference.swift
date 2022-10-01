@@ -11,6 +11,7 @@ enum FirebaseCollectionReference: String {
     case User
     case Like
     case Match
+    case Recent
 }
 
 func FirebaseReference(_ collectionReference: FirebaseCollectionReference) -> CollectionReference {

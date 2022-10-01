@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 //MARK: - Matches
 
@@ -39,4 +40,56 @@ func saveLikeToUser(userID: String?) {
 
 func didLikeUserWith(userID: String) -> Bool {
     return FirebaseUser.currentUser()?.likedUsersArray?.contains(userID) ?? false
+}
+
+//MARK: - Recent chats
+
+func createRecentItems(chatRoomID: String, users: [FirebaseUser]) {
+    var memberIDsToCreateRecent = [String]()
+    for user in users {
+        memberIDsToCreateRecent.append(user.objectID)
+    }
+    FirebaseReference(.Recent).whereField(K.chatRoomID, isEqualTo: chatRoomID).getDocuments { snapshot, error in
+        guard let snapshot = snapshot else { return }
+        if !snapshot.isEmpty {
+            memberIDsToCreateRecent = removeMemberWhoHasRecent(snapshot: snapshot, memberIDs: memberIDsToCreateRecent)
+        }
+        for userID in memberIDsToCreateRecent {
+            let senderUser = userID == FirebaseUser.currentID() ? FirebaseUser.currentUser()! : getReceiverFrom(users: users)
+            let receiverUser = userID == FirebaseUser.currentID() ? getReceiverFrom(users: users) : FirebaseUser.currentUser()!
+            let recentObject = RecentChat()
+            recentObject.objectID = UUID().uuidString
+            recentObject.chatRoomID = ""
+            recentObject.senderID = senderUser.objectID
+            recentObject.senderName = senderUser.username
+            recentObject.receiverID = receiverUser.objectID
+            recentObject.receiverName = receiverUser.username
+            recentObject.date = Date()
+            recentObject.memberIDs = [senderUser.objectID, receiverUser.objectID]
+            recentObject.lastMessage = ""
+            recentObject.unreadCounter = 0
+            recentObject.avatarLink = receiverUser.avatarLink
+            recentObject.saveToFireStore()
+        }
+    }
+}
+
+func removeMemberWhoHasRecent(snapshot: QuerySnapshot, memberIDs: [String]) -> [String] {
+    var memberIDsToCreateRecent = memberIDs
+    for recentData in snapshot.documents {
+        let currentRecent = recentData.data() as Dictionary
+        if let currentUserID = currentRecent[K.senderID] {
+            if memberIDsToCreateRecent.contains(currentUserID as! String) {
+                let index = memberIDsToCreateRecent.firstIndex(of: currentUserID as! String)!
+                memberIDsToCreateRecent.remove(at: index)
+            }
+        }
+    }
+    return memberIDsToCreateRecent
+}
+
+func getReceiverFrom(users: [FirebaseUser]) -> FirebaseUser {
+    var allUsers = users
+    allUsers.remove(at: allUsers.firstIndex(of: FirebaseUser.currentUser()!)!)
+    return allUsers.first!
 }

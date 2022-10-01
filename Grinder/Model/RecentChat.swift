@@ -67,10 +67,11 @@ class RecentChat {
     //MARK: - Saving
     
     func saveToFireStore() {
-        
+        FirebaseReference(.Recent).document(self.objectID).setData(self.dictionary as! [String: Any])
     }
     
     func deleteRecent() {
-        
+        FirebaseReference(.Recent).document(self.objectID).delete()
     }
 }
+
