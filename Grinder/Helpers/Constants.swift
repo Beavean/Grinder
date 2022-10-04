@@ -62,6 +62,18 @@ struct K {
     static let lastMessage = "lastMessage"
     static let unreadCounter = "unreadCounter"
 
+    //MARK: - Messages
+    
+    static let type = "type"
+    static let message = "message"
+    static let photoWidth = "photoWidth"
+    static let photoHeight = "photoHeight"
+    static let senderInitials = "senderInitials"
+    static let mediaURL = "mediaURL"
+    static let status = "status"
+    static let text = "text"
+    static let picture = "picture"
+    
 }
 
 

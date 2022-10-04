@@ -65,6 +65,13 @@ class RecentViewController: UIViewController {
         profileView.isMatchedUser = true
         self.navigationController?.pushViewController(profileView, animated: true)
     }
+    
+    private func goToChat(recent: RecentChat) {
+        restartChat(chatRoomID: recent.chatRoomID, memberIDs: recent.memberIDs)
+        let chatView = ChatViewController(chatID: recent.chatRoomID, recipientID: recent.receiverID, recipientName: recent.receiverName)
+        chatView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(chatView, animated: true)
+    }
 }
 
 extension RecentViewController: UITableViewDataSource {
@@ -96,8 +103,10 @@ extension RecentViewController: UICollectionViewDataSource {
 }
 
 extension RecentViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        goToChat(recent: recentChats[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
