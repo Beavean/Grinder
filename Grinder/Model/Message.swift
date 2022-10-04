@@ -73,5 +73,4 @@ class Message {
         mediaURL = dictionary[K.mediaURL] as? String ?? ""
         status = dictionary[K.status] as? String ?? ""
     }
-    
 }
