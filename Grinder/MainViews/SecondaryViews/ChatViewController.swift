@@ -87,7 +87,8 @@ class ChatViewController: MessagesViewController {
     }
     
     private func messageSend(text: String?, photo: UIImage?) {
-        
+        guard let currentUserID = FirebaseUser.currentID() else { return }
+        OutgoingMessage.send(chatID: chatID, text: text, photo: photo, memberIDs: [currentUserID, recipientID])
     }
 }
 
@@ -168,7 +169,7 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         for component in inputBar.inputTextView.components {
             if let text = component as? String {
-                print("DEBUG: Sending message, \(text)")
+                messageSend(text: text, photo: nil)
             }
         }
         messageInputBar.inputTextView.text = ""

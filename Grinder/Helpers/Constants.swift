@@ -73,6 +73,8 @@ struct K {
     static let status = "status"
     static let text = "text"
     static let picture = "picture"
+    static let sent = "Sent"
+    static let read = "Read"
     
 }
 

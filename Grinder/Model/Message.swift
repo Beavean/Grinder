@@ -32,7 +32,6 @@ class Message {
             self.senderID,
             self.senderName,
             self.type,
-            self.isIncoming,
             self.sentDate,
             self.message,
             self.photoWidth,
