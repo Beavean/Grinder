@@ -6,6 +6,7 @@
 //
 
 import FirebaseStorage
+import ProgressHUD
 
 let storage = Storage.storage()
 
@@ -17,6 +18,7 @@ class FileStorage {
         var task: StorageUploadTask!
         task = storageReference.putData(imageData!, metadata: nil, completion: { metaData, error in
             task.removeAllObservers()
+            ProgressHUD.dismiss()
             if let error = error {
                 print("DEBUG: error uploading image \(error.localizedDescription)")
                 return
@@ -30,6 +32,10 @@ class FileStorage {
                 completion(downloadUrl.absoluteString)
             }
         })
+        task.observe(StorageTaskStatus.progress) { snapshot in
+            let progress = snapshot.progress!.completedUnitCount / snapshot.progress!.totalUnitCount
+            ProgressHUD.showProgress(CGFloat(progress))
+        }
     }
     
     class func uploadImages(_ images: [UIImage?], completion: @escaping (_ imageLinks: [String]) -> Void) {

@@ -21,7 +21,15 @@ class IncomingMessage {
         let message = Message(dictionary: messageDictionary)
         let mkMessage = MKMassage(message: message)
         if message.type == K.picture {
-            print("DEBUG: This is a picture message")
+            let photoItem = PhotoMessage(path: message.mediaURL)
+            mkMessage.photoItem = photoItem
+            mkMessage.kind = MessageKind.photo(photoItem)
+            FileStorage.downloadImage(imageURL: messageDictionary[K.mediaURL] as? String ?? "") { image in
+                mkMessage.photoItem?.image = image
+                DispatchQueue.main.async {
+                    self.messageCollectionView.messagesCollectionView.reloadData()
+                }
+            }
         }
         return mkMessage
     }

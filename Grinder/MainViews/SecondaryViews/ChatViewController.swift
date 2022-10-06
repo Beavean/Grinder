@@ -22,6 +22,7 @@ class ChatViewController: MessagesViewController {
     let refreshController = UIRefreshControl()
     let currentUser = MKSender(senderId: FirebaseUser.currentID()!, displayName: FirebaseUser.currentUser()!.username)
     var loadedMessageDictionaries = [Dictionary<String, Any>]()
+    var gallery: GalleryController!
     var initialLoadCompleted = false
     var displayingMessagesCount = 0
     var maxMessageNumber = 0
@@ -110,7 +111,19 @@ class ChatViewController: MessagesViewController {
     }
     
     private func actionAttachMessage() {
-        print("DEBUG: Attaching image")
+        messageInputBar.inputTextView.resignFirstResponder()
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let takePhoto = UIAlertAction(title: "Camera", style: .default) { alert in
+            self.showImageGallery(camera: true)
+        }
+        let sharePhoto = UIAlertAction(title: "PhotoLibrary", style: .default) { alert in
+            self.showImageGallery(camera: false)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        optionMenu.addAction(takePhoto)
+        optionMenu.addAction(sharePhoto)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: true)
     }
     
     private func messageSend(text: String?, photo: UIImage?) {
@@ -250,6 +263,17 @@ class ChatViewController: MessagesViewController {
         let firstMessageDate = (loadedMessageDictionaries.first?[K.date] as? Timestamp)?.dateValue() ?? Date()
         return Calendar.current.date(byAdding: .second, value: -1, to: firstMessageDate) ?? firstMessageDate
     }
+    
+    //MARK: - Gallery
+    
+    private func showImageGallery(camera: Bool) {
+        self.gallery = GalleryController()
+        self.gallery.delegate = self
+        Config.tabsToShow = camera ? [.cameraTab] : [.imageTab]
+        Config.Camera.imageLimit = 1
+        Config.initialTab = .imageTab
+        self.present(gallery, animated: true)
+    }
 }
 
 //MARK: - MessagesDataSource
@@ -287,7 +311,7 @@ extension ChatViewController: MessagesDataSource {
             let color = UIColor.darkGray
             return NSAttributedString(string: status, attributes: [.font: font, .foregroundColor: color])
         }
-         return nil
+        return nil
     }
 }
 
@@ -370,6 +394,30 @@ extension ChatViewController: InputBarAccessoryViewDelegate {
         }
         messageInputBar.inputTextView.text = ""
         messageInputBar.invalidatePlugins()
+    }
+}
+
+extension ChatViewController: GalleryControllerDelegate {
+    
+    func galleryController(_ controller: Gallery.GalleryController, didSelectImages images: [Gallery.Image]) {
+        if images.count > 0 {
+            images.first!.resolve { image in
+                self.messageSend(text: nil, photo: image)
+            }
+        }
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryController(_ controller: Gallery.GalleryController, didSelectVideo video: Gallery.Video) {
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryController(_ controller: Gallery.GalleryController, requestLightbox images: [Gallery.Image]) {
+        controller.dismiss(animated: true)
+    }
+    
+    func galleryControllerDidCancel(_ controller: Gallery.GalleryController) {
+        controller.dismiss(animated: true)
     }
 }
 

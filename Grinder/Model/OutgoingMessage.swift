@@ -19,6 +19,15 @@ class OutgoingMessage {
         messageDictionary = message.dictionary as! [String: Any]
     }
     
+    init(message: Message, photo: UIImage, photoURL: String, memberIDs: [String]) {
+        message.type = K.picture
+        message.message = "Picture message"
+        message.photoWidth = Int(photo.size.width)
+        message.photoHeight = Int(photo.size.height)
+        message.mediaURL = photoURL
+        messageDictionary = message.dictionary as! [String: Any]
+    }
+    
     class func send(chatID: String, text: String?, photo: UIImage?, memberIDs: [String]) {
         guard let currentUser = FirebaseUser.currentUser() else { return }
         let message = Message()
@@ -33,10 +42,19 @@ class OutgoingMessage {
             let outgoingMessage = OutgoingMessage(message: message, text: text, memberIDs: memberIDs)
             outgoingMessage.sendMessage(chatRoomID: chatID, messageID: message.id, memberIDs: memberIDs)
         } else {
-            
+            if let photo = photo {
+                let fileName = Date().getStringFromDate()
+                let fileDirectory = "MediaMessages/Photo/" + "\(chatID)/" + "_\(fileName)" + "jpg"
+                FileStorage.saveImageLocally(imageData: photo.jpegData(compressionQuality: 0.6)! as NSData, fileName: fileName)
+                FileStorage.uploadImage(photo, directory: fileDirectory) { imageUrl in
+                    if let imageUrl = imageUrl {
+                        let outgoingMessage = OutgoingMessage(message: message, photo: photo, photoURL: imageUrl, memberIDs: memberIDs)
+                        outgoingMessage.sendMessage(chatRoomID: chatID, messageID: message.id, memberIDs: memberIDs)
+                    }
+                }
+            }
         }
         FirebaseListener.shared.updateRecents(chatRoomID: chatID, lastMessage: message.message)
-        
     }
     
     func sendMessage(chatRoomID: String, messageID: String, memberIDs: [String]) {
