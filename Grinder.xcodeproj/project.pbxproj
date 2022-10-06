@@ -27,6 +27,7 @@
 		08B8105E28EC604600789B4A /* MessageDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8105D28EC604600789B4A /* MessageDefaults.swift */; };
 		08B8106028EC634400789B4A /* PhotoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8105F28EC634400789B4A /* PhotoMessage.swift */; };
 		08B8106228EDA9F800789B4A /* OutgoingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8106128EDA9F800789B4A /* OutgoingMessage.swift */; };
+		08B8106428EEE7EC00789B4A /* IncomingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8106328EEE7EC00789B4A /* IncomingMessage.swift */; };
 		08D76F9428E325AA007B43DA /* UserProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */; };
 		08D76F9728E33972007B43DA /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */; };
 		08D76F9A28E37B29007B43DA /* LikedObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D76F9928E37B29007B43DA /* LikedObject.swift */; };
@@ -76,6 +77,7 @@
 		08B8105D28EC604600789B4A /* MessageDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDefaults.swift; sourceTree = "<group>"; };
 		08B8105F28EC634400789B4A /* PhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessage.swift; sourceTree = "<group>"; };
 		08B8106128EDA9F800789B4A /* OutgoingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutgoingMessage.swift; sourceTree = "<group>"; };
+		08B8106328EEE7EC00789B4A /* IncomingMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingMessage.swift; sourceTree = "<group>"; };
 		08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileTableViewController.swift; sourceTree = "<group>"; };
 		08D76F9628E33972007B43DA /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		08D76F9928E37B29007B43DA /* LikedObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedObject.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				08B8105F28EC634400789B4A /* PhotoMessage.swift */,
 				08EBD2EF28EAF59300C6E3E5 /* Message.swift */,
 				08B8106128EDA9F800789B4A /* OutgoingMessage.swift */,
+				08B8106328EEE7EC00789B4A /* IncomingMessage.swift */,
 				08F04E3D28DF10F5002D2A16 /* CardViews */,
 			);
 			path = Model;
@@ -391,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08F2377528DB4A0000D7A511 /* FirebaseListener.swift in Sources */,
+				08B8106428EEE7EC00789B4A /* IncomingMessage.swift in Sources */,
 				08F04E4C28DF1DD4002D2A16 /* UIImage+circleMasked.swift in Sources */,
 				08F04E4528DF1CCB002D2A16 /* UserCardFooterView.swift in Sources */,
 				08B5DCCD28E723FA00EC0FE8 /* RecentChat.swift in Sources */,

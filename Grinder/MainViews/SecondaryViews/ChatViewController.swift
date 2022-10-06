@@ -115,6 +115,8 @@ class ChatViewController: MessagesViewController {
             self.loadedMessageDictionaries = ((self.dictionaryArrayFromSnapshot(snapshot.documents)) as NSArray).sortedArray(using: [NSSortDescriptor(key: K.date, ascending: true)]) as! [Dictionary<String, Any>]
             print("DEBUG: \(self.loadedMessageDictionaries.count) Messages")
             self.insertMessages()
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToLastItem()
             self.initialLoadCompleted = true
         }
     }
@@ -122,7 +124,14 @@ class ChatViewController: MessagesViewController {
     //MARK: - Insert Messages
     
     private func insertMessages() {
-        
+        for messageDictionary in loadedMessageDictionaries {
+            insertMessage(messageDictionary)
+        }
+    }
+    
+    private func insertMessage(_ messageDictionary: Dictionary<String, Any>) {
+        let incoming = IncomingMessage(collectionView: self)
+        self.mkMessages.insert(incoming.createMessage(messageDictionary: messageDictionary)!, at: 0)
     }
     
     //MARK: - Helpers
@@ -151,6 +160,27 @@ extension ChatViewController: MessagesDataSource {
     
     func numberOfSections(in messagesCollectionView: MessageKit.MessagesCollectionView) -> Int {
         return mkMessages.count
+    }
+    
+    func cellTopLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if indexPath.section % 3 == 0 {
+            let text = MessageKitDateFormatter.shared.string(from: message.sentDate)
+            let font = UIFont.boldSystemFont(ofSize: 10)
+            let color = UIColor.darkGray
+            return NSAttributedString(string: text, attributes: [.font: font, .foregroundColor: color])
+        }
+        return nil
+    }
+    
+    func cellBottomLabelAttributedText(for message: MessageType, at indexPath: IndexPath) -> NSAttributedString? {
+        if isFromCurrentSender(message: message) {
+            let message = mkMessages[indexPath.section]
+            let status = indexPath.section == mkMessages.count - 1 ?  message.status : ""
+            let font = UIFont.boldSystemFont(ofSize: 10)
+            let color = UIColor.darkGray
+            return NSAttributedString(string: status, attributes: [.font: font, .foregroundColor: color])
+        }
+         return nil
     }
 }
 
