@@ -76,6 +76,9 @@ struct K {
     static let sent = "Sent"
     static let read = "Read"
     
+    //MARK: - Messages numbers
+    
+    static let numberOfMessagesToLoad = 20
 }
 
 
