@@ -167,4 +167,45 @@ class FirebaseListener {
             }
         }
     }
+    
+    func updateRecents(chatRoomID: String, lastMessage: String) {
+        FirebaseReference(.Recent).whereField(K.chatRoomID, isEqualTo: chatRoomID).getDocuments { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            if !snapshot.isEmpty {
+                for recent in snapshot.documents {
+                    let recentChat = RecentChat(recent.data())
+                    self.updateRecentItem(recent: recentChat, lastMessage: lastMessage)
+                }
+            }
+        }
+    }
+    
+    private func updateRecentItem(recent: RecentChat, lastMessage: String) {
+        if recent.senderID != FirebaseUser.currentID() {
+            recent.unreadCounter += 1
+        }
+        let values = [K.lastMessage: lastMessage, K.unreadCounter: recent.unreadCounter, K.date: Date()] as [String: Any]
+        FirebaseReference(.Recent).document(recent.objectID).updateData(values) { error in
+            print("DEBUG: Error updating recent. \(String(describing: error))")
+        }
+    }
+    
+    func resetRecentCounter(chatRoomID: String) {
+        FirebaseReference(.Recent).whereField(K.chatRoomID, isEqualTo: chatRoomID).whereField(K.senderID, isEqualTo: FirebaseUser.currentID()).getDocuments { snapshot, error in
+            guard let snapshot = snapshot else { return }
+            if !snapshot.isEmpty {
+                if let recentData = snapshot.documents.first?.data() {
+                    let recent = RecentChat(recentData)
+                    self.clearUnreadCounter(recent: recent)
+                }
+            }
+        }
+    }
+    
+    func clearUnreadCounter(recent: RecentChat) {
+        let values = [K.unreadCounter: 0] as [String: Any]
+        FirebaseReference(.Recent).document(recent.objectID).updateData(values) { error in
+            print("DEBUG: Reset recent counter. \(String(describing: error))")
+        }
+    }
 }

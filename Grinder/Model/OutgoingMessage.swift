@@ -32,7 +32,11 @@ class OutgoingMessage {
         if let text = text {
             let outgoingMessage = OutgoingMessage(message: message, text: text, memberIDs: memberIDs)
             outgoingMessage.sendMessage(chatRoomID: chatID, messageID: message.id, memberIDs: memberIDs)
+        } else {
+            
         }
+        FirebaseListener.shared.updateRecents(chatRoomID: chatID, lastMessage: message.message)
+        
     }
     
     func sendMessage(chatRoomID: String, messageID: String, memberIDs: [String]) {

@@ -18,11 +18,11 @@ class ChatViewController: MessagesViewController {
     private var chatID = String()
     private var recipientID = String()
     private var recipientName = String()
+    private var mkMessages = [MKMassage]()
     let refreshController = UIRefreshControl()
     let currentUser = MKSender(senderId: FirebaseUser.currentID()!, displayName: FirebaseUser.currentUser()!.username)
-    
-    private var mkMessages = [MKMassage]()
-    var loadedMessageDictionary = [Dictionary<String, Any>]()
+    var loadedMessageDictionaries = [Dictionary<String, Any>]()
+    var initialLoadCompleted = false
     
     //MARK: - Init
     
@@ -38,9 +38,22 @@ class ChatViewController: MessagesViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         configureLeftBarButton()
         configureMessageCollectionView()
         configureMessageInputBar()
+        downloadChats()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        FirebaseListener.shared.resetRecentCounter(chatRoomID: chatID)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        FirebaseListener.shared.resetRecentCounter(chatRoomID: chatID)
     }
     
     //MARK: - Configure
@@ -72,13 +85,12 @@ class ChatViewController: MessagesViewController {
         messageInputBar.inputTextView.isImagePasteEnabled = false
         messageInputBar.backgroundView.backgroundColor = .systemBackground
         messageInputBar.inputTextView.backgroundColor = .systemBackground
-        
-        
     }
     
     //MARK: - Actions
     
     @objc func backButtonPressed() {
+        FirebaseListener.shared.resetRecentCounter(chatRoomID: chatID)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -90,7 +102,42 @@ class ChatViewController: MessagesViewController {
         guard let currentUserID = FirebaseUser.currentID() else { return }
         OutgoingMessage.send(chatID: chatID, text: text, photo: photo, memberIDs: [currentUserID, recipientID])
     }
+    
+    //MARK: - Download Chats
+    
+    private func downloadChats() {
+        guard let currentID = FirebaseUser.currentID() else { return }
+        FirebaseReference(.Messages).document(currentID).collection(chatID).limit(to: 15).order(by: K.date, descending: true).getDocuments { snapshot, error in
+            guard let snapshot = snapshot else {
+                self.initialLoadCompleted = true
+                return
+            }
+            self.loadedMessageDictionaries = ((self.dictionaryArrayFromSnapshot(snapshot.documents)) as NSArray).sortedArray(using: [NSSortDescriptor(key: K.date, ascending: true)]) as! [Dictionary<String, Any>]
+            print("DEBUG: \(self.loadedMessageDictionaries.count) Messages")
+            self.insertMessages()
+            self.initialLoadCompleted = true
+        }
+    }
+    
+    //MARK: - Insert Messages
+    
+    private func insertMessages() {
+        
+    }
+    
+    //MARK: - Helpers
+    
+    private func dictionaryArrayFromSnapshot(_ snapshots: [DocumentSnapshot]) -> [Dictionary<String, Any>] {
+        var allMessages = [Dictionary<String, Any>]()
+        for snapshot in snapshots {
+            guard let snapshotData = snapshot.data() else { return allMessages }
+            allMessages.append(snapshotData)
+        }
+        return allMessages
+    }
 }
+
+//MARK: - MessagesDataSource
 
 extension ChatViewController: MessagesDataSource {
     
@@ -107,14 +154,16 @@ extension ChatViewController: MessagesDataSource {
     }
 }
 
+//MARK: - MessageCellDelegate
+
 extension ChatViewController: MessageCellDelegate {
     
     func didTapImage(in cell: MessageCollectionViewCell) {
         print("DEBUG: Tapped on image message")
     }
-    
-    
 }
+
+//MARK: - MessagesLayoutDelegate
 
 extension ChatViewController: MessagesLayoutDelegate {
     
@@ -130,6 +179,8 @@ extension ChatViewController: MessagesLayoutDelegate {
         avatarView.set(avatar: Avatar(initials: mkMessages[indexPath.section].senderInitials))
     }
 }
+
+//MARK: - MessagesDisplayDelegate
 
 extension ChatViewController: MessagesDisplayDelegate {
     
@@ -159,6 +210,8 @@ extension ChatViewController: MessagesDisplayDelegate {
         return .bubbleTail(tail, .curved)
     }
 }
+
+//MARK: - InputBarAccessoryViewDelegate
 
 extension ChatViewController: InputBarAccessoryViewDelegate {
     
