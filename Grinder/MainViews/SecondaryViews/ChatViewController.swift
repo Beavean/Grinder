@@ -28,10 +28,12 @@ class ChatViewController: MessagesViewController {
     var maxMessageNumber = 0
     var minMessageNumber = 0
     var loadOldMessages = false
+    var typingCounter = 0
     
     //MARK: - Listeners
     
     var newChatListener: ListenerRegistration?
+    var typingListener: ListenerRegistration?
     
     //MARK: - Init
     
@@ -50,6 +52,7 @@ class ChatViewController: MessagesViewController {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         setChatTitle()
+        createTypingObserver()
         configureLeftBarButton()
         configureMessageCollectionView()
         configureMessageInputBar()
@@ -229,6 +232,9 @@ class ChatViewController: MessagesViewController {
         if let newChatListener = newChatListener {
             newChatListener.remove()
         }
+        if let typingListener = typingListener {
+            typingListener.remove()
+        }
     }
     
     //MARK: - UIScrollViewdelegate
@@ -262,6 +268,41 @@ class ChatViewController: MessagesViewController {
     private func firstMessageDate() -> Date {
         let firstMessageDate = (loadedMessageDictionaries.first?[K.date] as? Timestamp)?.dateValue() ?? Date()
         return Calendar.current.date(byAdding: .second, value: -1, to: firstMessageDate) ?? firstMessageDate
+    }
+    
+    //MARK: - Typing indicator
+    
+    private func createTypingObserver() {
+        TypingListener.shared.createTypingObserver(chatRoomID: chatID) { isTyping in
+            self.setTypingIndicatorViewHidden(!isTyping, animated: false, whilePerforming: nil) { [weak self] success in
+                if success, self?.isLastSectionVisible() == true {
+                    self?.messagesCollectionView.scrollToLastItem()
+                }
+            }
+        }
+    }
+    
+    private func typingIndicatorUpdate() {
+        typingCounter += 1
+        TypingListener.saveTypingCounter(typing: true, chatRoomID: chatID)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.typingCounterStop()
+        }
+    }
+    
+    private func typingCounterStop() {
+        typingCounter -= 1
+        if typingCounter == 0 {
+            TypingListener.saveTypingCounter(typing: false, chatRoomID: chatID)
+        }
+    }
+    
+    private func isLastSectionVisible() -> Bool {
+        guard !mkMessages.isEmpty else {
+            return false
+        }
+        let lastIndexPath = IndexPath(item: 0, section: mkMessages.count - 1)
+        return messagesCollectionView.indexPathsForVisibleItems.contains(lastIndexPath)
     }
     
     //MARK: - Gallery
@@ -383,7 +424,9 @@ extension ChatViewController: MessagesDisplayDelegate {
 extension ChatViewController: InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, textViewTextDidChangeTo text: String) {
-        
+        if text != "" {
+            typingIndicatorUpdate()
+        }
     }
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
