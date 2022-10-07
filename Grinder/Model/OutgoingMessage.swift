@@ -62,4 +62,11 @@ class OutgoingMessage {
             FirebaseReference(.Messages).document(userID).collection(chatRoomID).document(messageID).setData(messageDictionary)
         }
     }
+    
+    class func updateMessage(withID: String, chatRoomID: String, memberIDs: [String]) {
+        let values = [K.status: K.read] as [String: Any]
+        for userID in memberIDs {
+            FirebaseReference(.Messages).document(userID).collection(chatRoomID).document(withID).updateData(values)
+        }
+    }
 }

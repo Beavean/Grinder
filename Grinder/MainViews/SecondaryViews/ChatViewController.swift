@@ -34,6 +34,7 @@ class ChatViewController: MessagesViewController {
     
     var newChatListener: ListenerRegistration?
     var typingListener: ListenerRegistration?
+    var updateChatListener: ListenerRegistration?
     
     //MARK: - Init
     
@@ -56,6 +57,7 @@ class ChatViewController: MessagesViewController {
         configureLeftBarButton()
         configureMessageCollectionView()
         configureMessageInputBar()
+        listenForReadStatusChange()
         downloadChats()
     }
     
@@ -187,6 +189,33 @@ class ChatViewController: MessagesViewController {
         }
     }
     
+    private func listenForReadStatusChange() {
+        updateChatListener = FirebaseReference(.Messages).document(FirebaseUser.currentID()!).collection(chatID).addSnapshotListener({ snapshot, error in
+            guard let snapshot = snapshot else { return }
+            if !snapshot.isEmpty {
+                snapshot.documentChanges.forEach { change in
+                    if change.type == .modified {
+                        self.updateMessage(change.document.data())
+                    }
+                }
+            }
+        })
+    }
+    
+    private func updateMessage(_ messageDictionary: Dictionary<String, Any>) {
+        for index in 0 ..< mkMessages.count {
+            let tempMessage = mkMessages[index]
+            if messageDictionary[K.objectID] as! String == tempMessage.messageId {
+                mkMessages[index].status = messageDictionary[K.status] as? String ?? K.sent
+                if mkMessages[index].status == K.read {
+                    DispatchQueue.main.async {
+                        self.messagesCollectionView.reloadData()
+                    }
+                }
+            }
+        }
+    }
+    
     //MARK: - Insert Messages
     
     private func insertMessages() {
@@ -203,6 +232,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func insertMessage(_ messageDictionary: Dictionary<String, Any>) {
+        markMessageAsRead(messageDictionary)
         let incoming = IncomingMessage(collectionView: self)
         self.mkMessages.append(incoming.createMessage(messageDictionary: messageDictionary)!)
     }
@@ -228,12 +258,22 @@ class ChatViewController: MessagesViewController {
         loadOldMessages = true
     }
     
+    private func markMessageAsRead(_ messageDictionary: Dictionary<String, Any>) {
+        guard let currentID = FirebaseUser.currentID() else { return }
+        if messageDictionary[K.senderID] as? String != FirebaseUser.currentID() {
+            OutgoingMessage.updateMessage(withID: messageDictionary[K.objectID] as! String, chatRoomID: chatID, memberIDs: [currentID, recipientID])
+        }
+    }
+    
     private func removeListeners() {
         if let newChatListener = newChatListener {
             newChatListener.remove()
         }
         if let typingListener = typingListener {
             typingListener.remove()
+        }
+        if let updateChatListener = updateChatListener {
+            updateChatListener.remove()
         }
     }
     
