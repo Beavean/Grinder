@@ -23,8 +23,8 @@ func removeCurrentUserID(userIDs: [String]) -> [String] {
 //MARK: - Save like to user
 
 func saveLikeToUser(userID: String?) {
-    guard let userID = userID, let currentUserID = FirebaseUser.currentID() else { return }
-    let like = LikedObject(id: UUID().uuidString, userID: currentUserID, likedUserID: userID, date: Date())
+    guard let userID = userID else { return }
+    let like = LikedObject(id: UUID().uuidString, userID: FirebaseUser.currentID(), likedUserID: userID, date: Date())
     like.saveToFirestore()
     if let currentUser = FirebaseUser.currentUser(), var likedArray = currentUser.likedUsersArray {
         if !didLikeUserWith(userID: userID) {

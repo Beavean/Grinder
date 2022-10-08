@@ -20,7 +20,7 @@ class ChatViewController: MessagesViewController {
     private var recipientName = String()
     private var mkMessages = [MKMassage]()
     let refreshController = UIRefreshControl()
-    let currentUser = MKSender(senderId: FirebaseUser.currentID()!, displayName: FirebaseUser.currentUser()!.username)
+    let currentUser = MKSender(senderId: FirebaseUser.currentID(), displayName: FirebaseUser.currentUser()!.username)
     var loadedMessageDictionaries = [Dictionary<String, Any>]()
     var gallery: GalleryController!
     var initialLoadCompleted = false
@@ -132,15 +132,13 @@ class ChatViewController: MessagesViewController {
     }
     
     private func messageSend(text: String?, photo: UIImage?) {
-        guard let currentUserID = FirebaseUser.currentID() else { return }
-        OutgoingMessage.send(chatID: chatID, text: text, photo: photo, memberIDs: [currentUserID, recipientID])
+        OutgoingMessage.send(chatID: chatID, text: text, photo: photo, memberIDs: [FirebaseUser.currentID(), recipientID])
     }
     
     //MARK: - Download Chats
     
     private func downloadChats() {
-        guard let currentID = FirebaseUser.currentID() else { return }
-        FirebaseReference(.Messages).document(currentID).collection(chatID).limit(to: 15).order(by: K.date, descending: true).getDocuments { snapshot, error in
+        FirebaseReference(.Messages).document(FirebaseUser.currentID()).collection(chatID).limit(to: 15).order(by: K.date, descending: true).getDocuments { snapshot, error in
             guard let snapshot = snapshot else {
                 self.initialLoadCompleted = true
                 return
@@ -157,8 +155,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func listenForNewChats() {
-        guard let currentID = FirebaseUser.currentID() else { return }
-        newChatListener = FirebaseReference(.Messages).document(currentID).collection(chatID).whereField(K.date, isGreaterThan: lastMessageDate()).addSnapshotListener({ snapshot, error in
+        newChatListener = FirebaseReference(.Messages).document(FirebaseUser.currentID()).collection(chatID).whereField(K.date, isGreaterThan: lastMessageDate()).addSnapshotListener({ snapshot, error in
             guard let snapshot = snapshot else { return }
             if !snapshot.isEmpty {
                 for change in snapshot.documentChanges {
@@ -175,9 +172,8 @@ class ChatViewController: MessagesViewController {
     }
     
     private func getOldMessagesInBackground() {
-        guard let currentID = FirebaseUser.currentID() else { return }
         if loadedMessageDictionaries.count > K.numberOfMessagesToLoad {
-            FirebaseReference(.Messages).document(currentID).collection(chatID).whereField(K.date, isLessThan: firstMessageDate()).getDocuments { snapshot, error in
+            FirebaseReference(.Messages).document(FirebaseUser.currentID()).collection(chatID).whereField(K.date, isLessThan: firstMessageDate()).getDocuments { snapshot, error in
                 guard let snapshot = snapshot else { return }
                 self.loadedMessageDictionaries = ((self.dictionaryArrayFromSnapshot(snapshot.documents)) as NSArray).sortedArray(using: [NSSortDescriptor(key: K.date, ascending: true)]) as! [Dictionary<String, Any>] + self.loadedMessageDictionaries
                 DispatchQueue.main.async {
@@ -190,7 +186,7 @@ class ChatViewController: MessagesViewController {
     }
     
     private func listenForReadStatusChange() {
-        updateChatListener = FirebaseReference(.Messages).document(FirebaseUser.currentID()!).collection(chatID).addSnapshotListener({ snapshot, error in
+        updateChatListener = FirebaseReference(.Messages).document(FirebaseUser.currentID()).collection(chatID).addSnapshotListener({ snapshot, error in
             guard let snapshot = snapshot else { return }
             if !snapshot.isEmpty {
                 snapshot.documentChanges.forEach { change in
@@ -259,9 +255,8 @@ class ChatViewController: MessagesViewController {
     }
     
     private func markMessageAsRead(_ messageDictionary: Dictionary<String, Any>) {
-        guard let currentID = FirebaseUser.currentID() else { return }
         if messageDictionary[K.senderID] as? String != FirebaseUser.currentID() {
-            OutgoingMessage.updateMessage(withID: messageDictionary[K.objectID] as! String, chatRoomID: chatID, memberIDs: [currentID, recipientID])
+            OutgoingMessage.updateMessage(withID: messageDictionary[K.objectID] as! String, chatRoomID: chatID, memberIDs: [FirebaseUser.currentID(), recipientID])
         }
     }
     

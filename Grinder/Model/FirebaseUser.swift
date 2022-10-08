@@ -120,9 +120,8 @@ class FirebaseUser: Equatable {
     
     //MARK: - Returning current user
     
-    class func currentID() -> String? {
-        guard let currentUser = Auth.auth().currentUser?.uid else { return nil }
-        return currentUser
+    class func currentID() -> String {
+        return Auth.auth().currentUser!.uid
     }
     
     class func currentUser() -> FirebaseUser? {
@@ -234,10 +233,9 @@ class FirebaseUser: Equatable {
     
     func updateCurrentUserInFireStore(withValues: [String: Any], completion: @escaping (_ error: Error?) -> Void) {
         if let dictionary = K.userDefaults.object(forKey: K.currentUser),
-           let userObject = (dictionary as? NSDictionary)?.mutableCopy() as? NSMutableDictionary,
-           let currentUserID = FirebaseUser.currentID() {
+           let userObject = (dictionary as? NSDictionary)?.mutableCopy() as? NSMutableDictionary {
             userObject.setValuesForKeys(withValues)
-            FirebaseReference(.User).document(currentUserID).updateData(withValues) { error in
+            FirebaseReference(.User).document(FirebaseUser.currentID()).updateData(withValues) { error in
                 completion(error)
                 if error == nil {
                     FirebaseUser(dictionary: userObject).saveUserLocally()

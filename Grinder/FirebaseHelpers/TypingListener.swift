@@ -27,9 +27,7 @@ class TypingListener {
                 }
             } else {
                 completion(false)
-                if let currentID = FirebaseUser.currentID() {
-                    FirebaseReference(.Typing).document(chatRoomID).setData([currentID: false])
-                }
+                FirebaseReference(.Typing).document(chatRoomID).setData([FirebaseUser.currentID(): false])
             }
         })
     }

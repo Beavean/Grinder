@@ -164,12 +164,11 @@ class ProfileTableViewController: UITableViewController {
     
     private func uploadAvatar(_ image: UIImage, completion: @escaping (_ avatarLink: String?) -> Void) {
         ProgressHUD.show()
-        guard let currentID = FirebaseUser.currentID() else { return }
-        let fileDirectory = "Avatars/_" + currentID + ".jpg"
+        let fileDirectory = "Avatars/_" + FirebaseUser.currentID() + ".jpg"
         FileStorage.uploadImage(image, directory: fileDirectory) { avatarLink in
             ProgressHUD.dismiss()
-            guard let currentUserID = FirebaseUser.currentID(), let image = image.jpegData(compressionQuality: 0.8) as? NSData else { return }
-            FileStorage.saveImageLocally(imageData: image, fileName: currentUserID)
+            guard let image = image.jpegData(compressionQuality: 0.8) as? NSData else { return }
+            FileStorage.saveImageLocally(imageData: image, fileName: FirebaseUser.currentID())
             completion(avatarLink)
         }
     }

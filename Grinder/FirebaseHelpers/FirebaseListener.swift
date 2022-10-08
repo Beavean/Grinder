@@ -95,8 +95,7 @@ class FirebaseListener {
     //MARK: - Likes
     
     func downloadUserLikes(completion: @escaping (_ likedUserIDs: [String]) -> Void) {
-        guard let currentUserID = FirebaseUser.currentID() else { return }
-        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: currentUserID).getDocuments { snapShot, error in
+        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: FirebaseUser.currentID()).getDocuments { snapShot, error in
             var allLikedIDs: [String] = []
             guard let snapShot = snapShot else {
                 completion(allLikedIDs)
@@ -115,8 +114,7 @@ class FirebaseListener {
     }
     
     func checkIfUserLikedUs(userID: String, completion: @escaping (_ didLike: Bool) -> Void) {
-        guard let currentUserID = FirebaseUser.currentID() else { return }
-        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: currentUserID).whereField(K.likingUserID, isEqualTo: userID).getDocuments { snapShot, error in
+        FirebaseReference(.Like).whereField(K.likedUserID, isEqualTo: FirebaseUser.currentID()).whereField(K.likingUserID, isEqualTo: userID).getDocuments { snapShot, error in
             guard let snapShot = snapShot else { return }
             completion(!snapShot.isEmpty)
         }
@@ -126,8 +124,7 @@ class FirebaseListener {
     
     func downloadUserMatches(completion: @escaping (_ matchUserIDs: [String]) -> Void) {
         let lastMonth = Calendar.current.date(byAdding: .year, value: -1, to: Date()) ?? Date()
-        guard let currentID = FirebaseUser.currentID() else { return }
-        FirebaseReference(.Match).whereField(K.memberIDs, arrayContains: currentID).whereField(K.date, isGreaterThan: lastMonth).order(by: K.date, descending: true).getDocuments { snapshot, error in
+        FirebaseReference(.Match).whereField(K.memberIDs, arrayContains: FirebaseUser.currentID()).whereField(K.date, isGreaterThan: lastMonth).order(by: K.date, descending: true).getDocuments { snapshot, error in
             var allMatchIDs = [String]()
             guard let snapshot = snapshot else { return }
             if !snapshot.isEmpty {
@@ -143,15 +140,14 @@ class FirebaseListener {
     }
     
     func saveMatch(userID: String) {
-        guard let currentID = FirebaseUser.currentID() else { return }
-        let match = MatchObject(id: UUID().uuidString, memberIDs: [currentID, userID], date: Date())
+        let match = MatchObject(id: UUID().uuidString, memberIDs: [FirebaseUser.currentID(), userID], date: Date())
         match.saveToFirestore()
     }
     
     //MARK: - Recent Chats
     
     func downloadRecentChatsFromFirestore(completion: @escaping (_ allRecentItems: [RecentChat]) -> Void) {
-        FirebaseReference(.Recent).whereField(K.senderID, isEqualTo: FirebaseUser.currentUser()).addSnapshotListener { querySnapshot, error in
+        FirebaseReference(.Recent).whereField(K.senderID, isEqualTo: FirebaseUser.currentID()).addSnapshotListener { querySnapshot, error in
             var recentChats = [RecentChat]()
             guard let snapshot = querySnapshot else { return }
             if !snapshot.isEmpty {

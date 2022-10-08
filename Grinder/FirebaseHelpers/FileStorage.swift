@@ -43,8 +43,8 @@ class FileStorage {
         var imageLinkArray = [String]()
         var nameSuffix = 0
         for image in images {
-            guard let currentID = FirebaseUser.currentID(), let image = image else { return }
-            let fileDirectory = "UserImages/" + currentID + "/" + "\(nameSuffix)" + ".jpg"
+            guard let image = image else { return }
+            let fileDirectory = "UserImages/" + FirebaseUser.currentID() + "/" + "\(nameSuffix)" + ".jpg"
             uploadImage(image, directory: fileDirectory) { imageLink in
                 guard let imageLink = imageLink else { return }
                 imageLinkArray.append(imageLink)
