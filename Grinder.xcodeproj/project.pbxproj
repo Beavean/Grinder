@@ -24,6 +24,7 @@
 		08B5DCCB28E707F400EC0FE8 /* RecentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */; };
 		08B5DCCD28E723FA00EC0FE8 /* RecentChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */; };
 		08B5DCCF28E87D4100EC0FE8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */; };
+		08B727D628F19D00008D5006 /* PushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B727D528F19D00008D5006 /* PushNotifications.swift */; };
 		08B8105C28EC5F7300789B4A /* MKMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8105B28EC5F7300789B4A /* MKMessage.swift */; };
 		08B8105E28EC604600789B4A /* MessageDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8105D28EC604600789B4A /* MessageDefaults.swift */; };
 		08B8106028EC634400789B4A /* PhotoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B8105F28EC634400789B4A /* PhotoMessage.swift */; };
@@ -75,6 +76,8 @@
 		08B5DCCA28E707F400EC0FE8 /* RecentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentViewController.swift; sourceTree = "<group>"; };
 		08B5DCCC28E723FA00EC0FE8 /* RecentChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentChat.swift; sourceTree = "<group>"; };
 		08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		08B727D428F18C55008D5006 /* Grinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Grinder.entitlements; sourceTree = "<group>"; };
+		08B727D528F19D00008D5006 /* PushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotifications.swift; sourceTree = "<group>"; };
 		08B8105B28EC5F7300789B4A /* MKMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKMessage.swift; sourceTree = "<group>"; };
 		08B8105D28EC604600789B4A /* MessageDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDefaults.swift; sourceTree = "<group>"; };
 		08B8105F28EC634400789B4A /* PhotoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMessage.swift; sourceTree = "<group>"; };
@@ -141,6 +144,7 @@
 		088C90C828DA33EB0032650A /* Grinder */ = {
 			isa = PBXGroup;
 			children = (
+				08B727D428F18C55008D5006 /* Grinder.entitlements */,
 				088C90C928DA33EB0032650A /* AppDelegate.swift */,
 				088C90CB28DA33EB0032650A /* SceneDelegate.swift */,
 				08F2377128DB489D00D7A511 /* WelcomeScreen */,
@@ -186,6 +190,7 @@
 				08F2377228DB48EF00D7A511 /* FirebaseCollectionReference.swift */,
 				08194B4C28F069FD0089BD64 /* TypingListener.swift */,
 				08F2377428DB4A0000D7A511 /* FirebaseListener.swift */,
+				08B727D528F19D00008D5006 /* PushNotifications.swift */,
 			);
 			path = FirebaseHelpers;
 			sourceTree = "<group>";
@@ -410,6 +415,7 @@
 				08D76F9C28E447C5007B43DA /* GlobalFunctions.swift in Sources */,
 				08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */,
 				08B5DCC528E62C9700EC0FE8 /* MatchViewController.swift in Sources */,
+				08B727D628F19D00008D5006 /* PushNotifications.swift in Sources */,
 				08F04E3F28DF1115002D2A16 /* UserCardModel.swift in Sources */,
 				08F2377328DB48EF00D7A511 /* FirebaseCollectionReference.swift in Sources */,
 				08F04E4A28DF1DBD002D2A16 /* UIColor.swift in Sources */,
@@ -582,11 +588,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Grinder/Grinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Grinder/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "$(PRODUCT_NAME) would like to access your media library";
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) would like to use your camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) would like to access your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -611,11 +621,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Grinder/Grinder.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9PF2GLF6PD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Grinder/Info.plist;
+				INFOPLIST_KEY_NSAppleMusicUsageDescription = "$(PRODUCT_NAME) would like to access your media library";
+				INFOPLIST_KEY_NSCameraUsageDescription = "$(PRODUCT_NAME) would like to use your camera";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "$(PRODUCT_NAME) would like to access your photo library";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

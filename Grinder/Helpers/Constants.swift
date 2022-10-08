@@ -11,6 +11,7 @@ struct K {
     
     static let userDefaults = UserDefaults.standard
     static let fileReference = "gs://grinder-e5ee5.appspot.com"
+    static let serverKey = "AAAASky3yqU:APA91bGjr_9YqxEWIGE1EhYEMlkqOGo3XAAmWRcEfYKKFJ1B6Jvk0G6g5fRhFGmT6UM0D-soOIFXKP3j_miVxtpH9ZOIZEjcNhTicj3z7ieZs7RyLVJBvRzdLhQ3LPcIcqFXAFO1kMI0"
     
     //MARK: - FirebaseUser
     

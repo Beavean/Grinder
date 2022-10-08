@@ -54,6 +54,7 @@ class OutgoingMessage {
                 }
             }
         }
+        PushNotificationService.shared.sendPushNotificationTo(userIDs: removeCurrentUserID(userIDs: memberIDs), body: message.message)
         FirebaseListener.shared.updateRecents(chatRoomID: chatID, lastMessage: message.message)
     }
     
