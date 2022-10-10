@@ -20,12 +20,14 @@ class FirebaseListener {
     func downloadUsersFromFirebase(isInitialLoad: Bool, limit: Int, lastDocumentSnapshot: DocumentSnapshot?, completion: @escaping (_ users: [FirebaseUser], _ snapshot: DocumentSnapshot?) -> Void) {
         var query: Query!
         var users = [FirebaseUser]()
+        let ageFrom = Int(K.userDefaults.object(forKey: K.ageFrom) as? Float ?? 18.0)
+        let ageTo = Int(K.userDefaults.object(forKey: K.ageTo) as? Float ?? 30.0)
         if isInitialLoad {
-            query = FirebaseReference(.User).order(by: K.registeredDate, descending: false).limit(to: limit)
+            query = FirebaseReference(.User).whereField(K.age, isGreaterThan: ageFrom).whereField(K.age, isLessThan: ageTo).whereField(K.isMale, isEqualTo: isLookingForMale()).limit(to: limit)
             print("DEBUG: Downloading user from first \(limit)")
         } else {
             if let lastDocumentSnapshot = lastDocumentSnapshot {
-                query = FirebaseReference(.User).order(by: K.registeredDate, descending: false).limit(to: limit).start(afterDocument: lastDocumentSnapshot)
+                query = FirebaseReference(.User).whereField(K.age, isGreaterThan: ageFrom).whereField(K.age, isLessThan: ageTo).whereField(K.isMale, isEqualTo: isLookingForMale()).limit(to: limit).start(afterDocument: lastDocumentSnapshot)
                 print("DEBUG: Next user loading from limit \(limit)")
             } else {
                 print("DEBUG: last snapshot is nil")

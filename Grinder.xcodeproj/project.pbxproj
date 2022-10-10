@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080FBDA028F441E300D71902 /* EmptyDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080FBD9F28F441E300D71902 /* EmptyDataView.swift */; };
+		080FBDA228F441F600D71902 /* EmptyDataView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 080FBDA128F441F600D71902 /* EmptyDataView.xib */; };
 		08194B4D28F069FD0089BD64 /* TypingListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08194B4C28F069FD0089BD64 /* TypingListener.swift */; };
 		088C90CA28DA33EB0032650A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088C90C928DA33EB0032650A /* AppDelegate.swift */; };
 		088C90CC28DA33EB0032650A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088C90CB28DA33EB0032650A /* SceneDelegate.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		080FBD9F28F441E300D71902 /* EmptyDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyDataView.swift; sourceTree = "<group>"; };
+		080FBDA128F441F600D71902 /* EmptyDataView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyDataView.xib; sourceTree = "<group>"; };
 		08194B4C28F069FD0089BD64 /* TypingListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingListener.swift; sourceTree = "<group>"; };
 		088C90C628DA33EB0032650A /* Grinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Grinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		088C90C928DA33EB0032650A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +172,8 @@
 				08D76F9328E325AA007B43DA /* UserProfileTableViewController.swift */,
 				08B5DCC428E62C9700EC0FE8 /* MatchViewController.swift */,
 				08B5DCCE28E87D4100EC0FE8 /* ChatViewController.swift */,
+				080FBD9F28F441E300D71902 /* EmptyDataView.swift */,
+				080FBDA128F441F600D71902 /* EmptyDataView.xib */,
 			);
 			path = SecondaryViews;
 			sourceTree = "<group>";
@@ -347,6 +353,7 @@
 			files = (
 				088C90D628DA33EC0032650A /* LaunchScreen.storyboard in Resources */,
 				088C90DE28DA38450032650A /* GoogleService-Info.plist in Resources */,
+				080FBDA228F441F600D71902 /* EmptyDataView.xib in Resources */,
 				088C90D328DA33EC0032650A /* Assets.xcassets in Resources */,
 				088C90D128DA33EB0032650A /* Main.storyboard in Resources */,
 			);
@@ -412,6 +419,7 @@
 				08F04E4E28DF1DF9002D2A16 /* UIView+Anchors&Shadow.swift in Sources */,
 				08B3FEED28DC78D80008E317 /* NSAttributedString+Attributes.swift in Sources */,
 				08F04E4328DF1603002D2A16 /* UserCardContentView.swift in Sources */,
+				080FBDA028F441E300D71902 /* EmptyDataView.swift in Sources */,
 				08D76F9C28E447C5007B43DA /* GlobalFunctions.swift in Sources */,
 				08F2376A28DB1BAC00D7A511 /* RegisterViewController.swift in Sources */,
 				08B5DCC528E62C9700EC0FE8 /* MatchViewController.swift in Sources */,

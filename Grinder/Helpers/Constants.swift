@@ -58,6 +58,7 @@ struct K {
     static let matchViewIdentifier = "MatchViewController"
     static let newMatchCollectionViewCellIdentifier = "NewMatchCollectionViewCell"
     static let recentTableViewCellIdentifier = "RecentTableViewCell"
+    static let emptyDataViewIdentifier = "EmptyDataView"
     
     //MARK: - Recents
     

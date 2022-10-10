@@ -33,6 +33,7 @@ class FirebaseUser: Equatable {
     var imageLinks: [String]?
     let registeredDate = Date()
     var pushID: String?
+    var age: Int
     
     var userDictionary: NSDictionary {
         return NSDictionary(objects: [
@@ -52,7 +53,8 @@ class FirebaseUser: Equatable {
             self.likedUsersArray ?? [],
             self.imageLinks ?? [],
             self.registeredDate,
-            self.pushID ?? ""
+            self.pushID ?? "",
+            self.age
         ], forKeys: [
             K.objectID as NSCopying,
             K.email as NSCopying,
@@ -70,7 +72,8 @@ class FirebaseUser: Equatable {
             K.likedUsersArray as NSCopying,
             K.imageLinks as NSCopying,
             K.registeredDate as NSCopying,
-            K.pushID as NSCopying
+            K.pushID as NSCopying,
+            K.age as NSCopying
         ])
     }
     
@@ -92,6 +95,7 @@ class FirebaseUser: Equatable {
         self.avatarLink = avatarLink
         self.likedUsersArray = []
         self.imageLinks = []
+        self.age = abs(dateOfBirth.interval(ofComponent: .year, fromDate: Date()))
     }
     
     init(dictionary: NSDictionary) {
@@ -109,6 +113,7 @@ class FirebaseUser: Equatable {
         self.avatarLink = dictionary[K.avatarLink] as? String ?? ""
         self.likedUsersArray = dictionary[K.likedUsersArray] as? [String]
         self.imageLinks = dictionary[K.imageLinks] as? [String]
+        self.age = dictionary[K.age] as? Int ?? 18
         if let date = dictionary[K.dateOfBirth] as? Timestamp {
             dateOfBirth = date.dateValue()
         } else {

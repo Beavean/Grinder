@@ -117,3 +117,7 @@ func getReceiverFrom(users: [FirebaseUser]) -> FirebaseUser {
     allUsers.remove(at: allUsers.firstIndex(of: FirebaseUser.currentUser()!)!)
     return allUsers.first!
 }
+
+func isLookingForMale() -> Bool {
+    return FirebaseUser.currentUser()?.lookingFor == "Male"
+}
