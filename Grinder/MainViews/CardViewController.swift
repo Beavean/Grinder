@@ -13,6 +13,10 @@ import ProgressHUD
 
 class CardViewController: UIViewController {
     
+    //MARK: - IBOutlets
+    
+    @IBOutlet weak var emptyDataView: EmptyDataView!
+    
     //MARK: - Properties
     
     private let cardStack = SwipeCardStack()
@@ -30,11 +34,41 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         downloadInitialUsers()
+        showEmptyDataView(loading: true)
+        emptyDataView.delegate = self
+        downloadInitialUsers()
+    }
+    
+    private func showEmptyDataView(loading: Bool) {
+        emptyDataView.isHidden = false
+        emptyDataView.reloadButton.isEnabled = true
+        let imageName = loading ? "searchingBackground" : "completed"
+        let title = loading ? "Searching for users..." : "You have swiped all users"
+        let subtitle = loading ? "Please wait" : "Please change the search parameters"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.view.bringSubviewToFront(self.emptyDataView)
+        }
+        emptyDataView.imageView.image = UIImage(named: imageName)
+        emptyDataView.titleLabel.text = title
+        emptyDataView.subTitleLabel.text = subtitle
+        emptyDataView.reloadButton.isHidden = loading
+    }
+    
+    private func hideEmptyDataView() {
+        emptyDataView.isHidden = true
+    }
+    
+    private func resetLoadCount() {
+        isInitialLoad = true
+        showReserve = false
+        lastDocumentSnapshot = nil
+        numberOfCardsAdded = 0
     }
     
     //MARK: - Layout cards
     
     private func layoutCardStackView() {
+        hideEmptyDataView()
         cardStack.delegate = self
         cardStack.dataSource = self
         view.addSubview(cardStack)
@@ -169,6 +203,9 @@ extension CardViewController: SwipeCardStackDelegate, SwipeCardStackDataSource {
         }
         showReserve = true
         layoutCardStackView()
+        if secondCardModels.isEmpty {
+            showEmptyDataView(loading: false)
+        }
     }
     
     func cardStack(_ cardStack: SwipeCardStack, didSwipeCardAt index: Int, with direction: SwipeDirection) {
@@ -205,5 +242,14 @@ extension CardViewController: MatchViewControllerDelegate {
     }
     
     func didClickKeepSwiping() {
+    }
+}
+
+extension CardViewController: EmptyDataViewDelegate {
+    
+    func didClickReloadButton() {
+        resetLoadCount()
+        downloadInitialUsers()
+        emptyDataView.reloadButton.isEnabled = false
     }
 }

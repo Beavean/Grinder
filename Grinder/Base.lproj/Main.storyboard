@@ -314,10 +314,27 @@
                     <view key="view" contentMode="scaleToFill" id="bI1-H8-EUp">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZj-ff-NmL" customClass="EmptyDataView" customModule="Grinder" customModuleProvider="target">
+                                <rect key="frame" x="16" y="141" width="358" height="344"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="344" id="hNV-dx-Gs1"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2sB-o0-nCs"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="iZj-ff-NmL" firstAttribute="leading" secondItem="2sB-o0-nCs" secondAttribute="leading" constant="16" id="6Qw-4b-bbp"/>
+                            <constraint firstItem="iZj-ff-NmL" firstAttribute="top" secondItem="2sB-o0-nCs" secondAttribute="top" constant="50" id="fS6-ZJ-G82"/>
+                            <constraint firstItem="2sB-o0-nCs" firstAttribute="trailing" secondItem="iZj-ff-NmL" secondAttribute="trailing" constant="16" id="kVI-kf-KLd"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Grinder" id="5NZ-MV-xzr"/>
+                    <connections>
+                        <outlet property="emptyDataView" destination="iZj-ff-NmL" id="aIP-m5-aKi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sMp-L7-d3S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

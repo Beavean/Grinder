@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol EmptyDataViewDelegate {
+    func didClickReloadButton()
+}
+
 class EmptyDataView: UIView {
     
     //MARK: - IBOutlets
@@ -16,6 +20,10 @@ class EmptyDataView: UIView {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var reloadButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    
+    //MARK: - Properties
+    
+    var delegate: EmptyDataViewDelegate?
     
     //MARK: - Initialiser
     
@@ -30,10 +38,13 @@ class EmptyDataView: UIView {
     }
     
     private func commonInit() {
+        Bundle.main.loadNibNamed(K.emptyDataViewIdentifier, owner: self)
+        addSubview(contentView)
+        contentView.frame = self.bounds
+        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
     
     @IBAction func reloadButtonPressed(_ sender: UIButton) {
-        
+        delegate?.didClickReloadButton()
     }
-    
 }
