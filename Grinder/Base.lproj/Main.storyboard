@@ -1504,6 +1504,99 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle=" " id="RtE-Qi-5NZ">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="Hzo-oY-Hr3">
+                                        <rect key="frame" x="0.0" y="1496" width="390" height="46"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Hzo-oY-Hr3" id="PAL-Pz-bNJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="46"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Choose age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHv-EP-ezJ">
+                                                    <rect key="frame" x="20" y="11" width="350" height="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bHv-EP-ezJ" firstAttribute="top" secondItem="PAL-Pz-bNJ" secondAttribute="topMargin" id="CsQ-5u-k0e"/>
+                                                <constraint firstItem="bHv-EP-ezJ" firstAttribute="leading" secondItem="PAL-Pz-bNJ" secondAttribute="leadingMargin" id="IHU-Dg-cTl"/>
+                                                <constraint firstItem="bHv-EP-ezJ" firstAttribute="centerY" secondItem="PAL-Pz-bNJ" secondAttribute="centerY" id="LHn-QD-OZI"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="bHv-EP-ezJ" secondAttribute="trailing" id="lRJ-xP-BRb"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="9OU-G4-6hO">
+                                        <rect key="frame" x="0.0" y="1542" width="390" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9OU-G4-6hO" id="DHO-Hi-47P">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Age from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEe-zK-va1">
+                                                    <rect key="frame" x="20" y="11" width="350" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="20" minValue="14" maxValue="90" translatesAutoresizingMaskIntoConstraints="NO" id="XFN-2f-pGu">
+                                                    <rect key="frame" x="18" y="36" width="354" height="34"/>
+                                                    <connections>
+                                                        <action selector="ageFromSliderValueChanged:" destination="HtS-8C-74b" eventType="valueChanged" id="ziI-Bf-hf0"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XFN-2f-pGu" firstAttribute="top" secondItem="EEe-zK-va1" secondAttribute="bottom" constant="4" id="4PI-qU-kEB"/>
+                                                <constraint firstItem="XFN-2f-pGu" firstAttribute="leading" secondItem="DHO-Hi-47P" secondAttribute="leadingMargin" id="AQT-oH-6mJ"/>
+                                                <constraint firstItem="XFN-2f-pGu" firstAttribute="trailing" secondItem="DHO-Hi-47P" secondAttribute="trailingMargin" id="BFX-tV-cPV"/>
+                                                <constraint firstItem="EEe-zK-va1" firstAttribute="top" secondItem="DHO-Hi-47P" secondAttribute="topMargin" id="CVy-gd-lGJ"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="EEe-zK-va1" secondAttribute="trailing" id="Cpz-am-3Nu"/>
+                                                <constraint firstItem="EEe-zK-va1" firstAttribute="leading" secondItem="DHO-Hi-47P" secondAttribute="leadingMargin" id="YJe-q6-qtn"/>
+                                                <constraint firstItem="EEe-zK-va1" firstAttribute="top" secondItem="DHO-Hi-47P" secondAttribute="topMargin" id="cNr-Un-T4C"/>
+                                                <constraint firstItem="EEe-zK-va1" firstAttribute="leading" secondItem="DHO-Hi-47P" secondAttribute="leadingMargin" id="gyJ-XA-9eI"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="100" id="Lyj-WK-gGs">
+                                        <rect key="frame" x="0.0" y="1642" width="390" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lyj-WK-gGs" id="dM9-CG-E1F">
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Age to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFB-aN-g7R">
+                                                    <rect key="frame" x="20.000000000000004" y="11" width="49.333333333333343" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <slider opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="50" minValue="14" maxValue="90" translatesAutoresizingMaskIntoConstraints="NO" id="jDh-H8-xeX">
+                                                    <rect key="frame" x="18" y="36" width="354" height="34"/>
+                                                    <connections>
+                                                        <action selector="ageToSliderValueChanged:" destination="HtS-8C-74b" eventType="valueChanged" id="LwK-HK-VxP"/>
+                                                    </connections>
+                                                </slider>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="vFB-aN-g7R" firstAttribute="top" secondItem="dM9-CG-E1F" secondAttribute="topMargin" constant="4" id="97X-y8-gM1"/>
+                                                <constraint firstItem="vFB-aN-g7R" firstAttribute="top" secondItem="dM9-CG-E1F" secondAttribute="topMargin" id="Muw-MI-Pir"/>
+                                                <constraint firstItem="vFB-aN-g7R" firstAttribute="leading" secondItem="dM9-CG-E1F" secondAttribute="leadingMargin" constant="12" id="VTi-a5-yBf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="vFB-aN-g7R" secondAttribute="trailing" constant="12" id="cj8-7u-PDy"/>
+                                                <constraint firstItem="vFB-aN-g7R" firstAttribute="leading" secondItem="dM9-CG-E1F" secondAttribute="leadingMargin" id="hGF-HN-BfG"/>
+                                                <constraint firstItem="jDh-H8-xeX" firstAttribute="top" secondItem="vFB-aN-g7R" secondAttribute="bottom" constant="4" id="i4a-MJ-GuM"/>
+                                                <constraint firstItem="jDh-H8-xeX" firstAttribute="leading" secondItem="dM9-CG-E1F" secondAttribute="leadingMargin" id="lhC-Ze-WcE"/>
+                                                <constraint firstItem="jDh-H8-xeX" firstAttribute="trailing" secondItem="dM9-CG-E1F" secondAttribute="trailingMargin" id="yam-0d-afp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="HtS-8C-74b" id="bcb-Nt-qfo"/>
@@ -1514,6 +1607,10 @@
                     <connections>
                         <outlet property="aboutMeBackgroundView" destination="V1f-IX-Ovt" id="V8O-fJ-khJ"/>
                         <outlet property="aboutMeTextView" destination="eNX-WY-E3J" id="FUg-TQ-KuY"/>
+                        <outlet property="ageFromLabel" destination="EEe-zK-va1" id="q5J-Uh-3Kg"/>
+                        <outlet property="ageFromSlider" destination="XFN-2f-pGu" id="kPr-bc-nOE"/>
+                        <outlet property="ageToLabel" destination="vFB-aN-g7R" id="5iO-85-dLs"/>
+                        <outlet property="ageToSlider" destination="jDh-H8-xeX" id="gMz-jW-nPy"/>
                         <outlet property="avatarImageView" destination="DrP-hX-gCr" id="zxq-3D-Lfd"/>
                         <outlet property="cityCountryLabel" destination="UFz-zz-iKE" id="kxb-80-7sn"/>
                         <outlet property="cityTextField" destination="xdA-6h-o41" id="TfK-WT-f0J"/>
@@ -1529,7 +1626,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qdi-A9-kUb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3528" y="861"/>
+            <point key="canvasLocation" x="3527.6923076923076" y="860.90047393364921"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ijE-6p-WY7">

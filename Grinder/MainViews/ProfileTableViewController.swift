@@ -26,7 +26,10 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var countryTextField: UITextField!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var lookingForTextField: UITextField!
-    
+    @IBOutlet weak var ageFromSlider: UISlider!
+    @IBOutlet weak var ageToSlider: UISlider!
+    @IBOutlet weak var ageToLabel: UILabel!
+    @IBOutlet weak var ageFromLabel: UILabel!
     //MARK: - Properties
     
     var uploadingAvatar = true
@@ -34,6 +37,9 @@ class ProfileTableViewController: UITableViewController {
     var gallery: GalleryController!
     
     var alertTextField: UITextField!
+    
+    var genderPickerView: UIPickerView!
+    var genderOptions = ["Male", "Female"]
     
     var editingMode = false {
         didSet {
@@ -47,7 +53,9 @@ class ProfileTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupPickerView()
         setupBackgrounds()
+        setAgeLabels()
         if FirebaseUser.currentUser() != nil {
             loadUserData()
             updateEditingMode()
@@ -72,6 +80,31 @@ class ProfileTableViewController: UITableViewController {
     @IBAction func editButtonPressed(_ sender: UIButton) {
         editingMode.toggle()
         editingMode ? showKeyboard() : hideKeyboard()
+    }
+    
+    @IBAction func ageFromSliderValueChanged(_ sender: UISlider) {
+        self.ageFromLabel.text = "Age from " + String(format: "%.0f", sender.value)
+        saveAgeSettings()
+    }
+    
+    @IBAction func ageToSliderValueChanged(_ sender: UISlider) {
+        self.ageToLabel.text = "Age to " + String(format: "%.0f", sender.value)
+        saveAgeSettings()
+    }
+    
+    private func saveAgeSettings() {
+        K.userDefaults.setValue(ageFromSlider.value, forKey: K.ageFrom)
+        K.userDefaults.setValue(ageToSlider.value, forKey: K.ageTo)
+        K.userDefaults.synchronize()
+    }
+    
+    private func setAgeLabels() {
+        let ageFrom = K.userDefaults.object(forKey: K.ageFrom) as? Float ?? 20.0
+        let ageTo = K.userDefaults.object(forKey: K.ageTo) as? Float ?? 50.0
+        ageFromSlider.value = ageFrom
+        ageToSlider.value = ageTo
+        self.ageFromLabel.text = "Age from " + String(format: "%.0f", ageFrom)
+        self.ageToLabel.text = "Age to " + String(format: "%.0f", ageTo)
     }
     
     //MARK: - Selectors
@@ -113,6 +146,27 @@ class ProfileTableViewController: UITableViewController {
     private func showSaveButton() {
         let saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(editUserData))
         navigationItem.rightBarButtonItem = editingMode ? saveButton : nil
+    }
+    
+    private func setupPickerView() {
+        genderPickerView = UIPickerView()
+        genderPickerView.delegate = self
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor().primary()
+        toolBar.sizeToFit()
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(dismissKeyboard))
+        doneButton.tintColor = .black
+        toolBar.setItems([spaceButton, doneButton], animated: true)
+        toolBar.isUserInteractionEnabled = true
+        lookingForTextField.inputAccessoryView = toolBar
+        lookingForTextField.inputView = genderPickerView
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(false)
     }
     
     //MARK: - Helpers
@@ -322,3 +376,25 @@ extension ProfileTableViewController: GalleryControllerDelegate {
         controller.dismiss(animated: true)
     }
 }
+
+extension ProfileTableViewController: UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genderOptions.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genderOptions[row]
+    }
+}
+
+extension ProfileTableViewController: UIPickerViewDelegate {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        lookingForTextField.text = genderOptions[row]
+    }
+}
+
